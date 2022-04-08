@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Profil</h2>
+  <div class="inforemations" >
+    <p>test: {{ user[0].id }}</p>
+    <p>Nom: {{ user[0].nom }}</p>
+    <p>Prénom: {{ user[0].prenom }}</p>
+    <p>Email: {{ user[0].email }}</p>
+  </div>
+  <div class="profil-image">
+    <img [src]="user[0].photo" alt="image de profil">
+    <span>Modifier le profil</span>
+  </div>
+</div>
