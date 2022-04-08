@@ -12,17 +12,13 @@ import { UsersService } from 'src/app/core/services/users.service';
 })
 export class ProfilComponent implements OnInit {
   user$!: Observable<User>;
-  user: any;
 
   constructor(private userService: UsersService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const userId = +this.route.snapshot.params['id'];
-    this.userService.getUserById(userId).subscribe(res => {
-      console.log(res)
-      this.user = res;
-    });
+    this.user$ = this.userService.getUserById(userId);
   }
 
 }

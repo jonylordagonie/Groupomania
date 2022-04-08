@@ -1,9 +1,15 @@
 const express = require("express");
 const path = require("path");
+const db = require('./database')
 
 const usersRouter = require('./routes/users')
 
 app = express();
+
+app.use(express.json())
+db.sync()
+  .then(console.log('connexion a la db reussis'))
+  .catch(error => console.log(error))
 
 app.use(express.json());
 

@@ -4,9 +4,7 @@ const db = require('../database');
 const userController = require('../controllers/user.controller')
 
 router.get('/', userController.getAllUsers);
-
-router.post('/', userController.addUser)
-
 router.get("/:id", userController.getUserById);
+router.post('/', userController.addUser);
 
 module.exports = router;

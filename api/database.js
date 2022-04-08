@@ -1,6 +1,4 @@
-const mysql = require("mysql");
-const { Sequelize } = require('sequelize');
-require("dotenv").config();
+// const mysql = require("mysql");
 
 // const connection = mysql.createConnection({
 //  host: process.env.BD_HOST,
@@ -14,9 +12,17 @@ require("dotenv").config();
 // console.log(`mysql : ${message}`);
 // });
 
-module.exports = new Sequelize(process.env.BD_DATABASE, process.env.BD_USER, process.env.BD_PASSWORD, {
-host: 'localhost',
-dialect: 'mysql',
-});
+const Sequelize = require("sequelize");
+require("dotenv").config();
 
-// module.exports = connection;
+const sequelize = new Sequelize(
+  process.env.BD_DATABASE,
+  process.env.BD_USER,
+  process.env.BD_PASSWORD,
+  {
+    host: process.env.BD_HOST,
+    dialect: 'mysql',
+  }
+);
+
+module.exports = sequelize;
