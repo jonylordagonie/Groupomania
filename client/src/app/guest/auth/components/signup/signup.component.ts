@@ -36,8 +36,8 @@ export class SignupComponent implements OnInit {
   onSignup(): void{
     this.userService.addUser(this.signupForm.value).pipe(
       tap(() => {
-        this.router.navigateByUrl('/index'), 
-        this.auth.login();
+        this.auth.login(),
+        this.router.navigateByUrl('/index');
       })
     ).subscribe();
   }

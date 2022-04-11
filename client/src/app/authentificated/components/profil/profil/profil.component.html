@@ -1,7 +1,6 @@
 <div class="container" *ngIf="user$ | async as user">
   <h2>Profil</h2>
   <div class="inforemations" >
-    <p>test: {{ user.id }}</p>
     <p>Nom: {{ user.nom }}</p>
     <p>Prénom: {{ user.prenom }}</p>
     <p>Email: {{ user.email }}</p>

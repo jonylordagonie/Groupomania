@@ -9,7 +9,7 @@ import { map, Observable, switchMap } from "rxjs";
 
 export class UsersService {
 
-  users!: User[];
+  users!: User;
 
   constructor(private http: HttpClient) { }
   
@@ -22,7 +22,7 @@ export class UsersService {
   }
 
   addUser(formValue: { nom: string, prenom: string, email: string, password: string }): Observable<User>{
-    return this.http.post<User>(`http://localhost:3000/api/users`, User)
+    return this.http.post<User>(`http://localhost:3000/api/users`, formValue)
   }
 
 }

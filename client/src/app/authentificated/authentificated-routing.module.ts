@@ -4,14 +4,16 @@ import { AuthGuard } from "../core/guards/auth.guard";
 import { ForumComponent } from "./components/forum/forum.component";
 import { IndexComponent } from "./components/index/index.component";
 import { InstamaniaComponent } from "./components/instamania/instamania.component";
-import { ProfilComponent } from "./components/profil/profil.component";
+import { ModifyProfilComponent } from "./components/profil/modify-profil/modify-profil.component";
+import { ProfilComponent } from "./components/profil/profil/profil.component";
+
 
 const routes: Routes = [
-  { path: 'profil/:id', component: ProfilComponent   },
+  { path: 'profil/:id', component: ProfilComponent },
   { path: 'forum', component: ForumComponent, canActivate:[AuthGuard]},
   { path: 'index', component: IndexComponent,  },
   { path: 'instamania', component: InstamaniaComponent},
-  
+  { path: 'profil/:id/modify', component: ModifyProfilComponent}
 ];
 
 @NgModule({

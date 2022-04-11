@@ -1,0 +1,31 @@
+<div class="container" *ngIf="user$ | async as user">
+  <h2>Profil</h2>
+  <form [formGroup]="modifyProfilForm">
+    <div class="form-container">
+      <div class="form-group">
+        <label for="name">Nom:</label>
+        <input type="text" id="name" [placeholder]="user.prenom" style="color: #000">
+      </div>
+      <div class="form-group">
+        <label for="firstname">Prénom:</label>
+        <input type="text" id="firstname" [placeholder]="user.nom" style="color: #000">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [placeholder]="user.email" style="color: #000">
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button type="submit" (click)="onSubmit()" class="btn btn-one">
+        <span>Valider</span>
+      </button>
+    </div>
+  </form>
+  <div class="profil-image">
+    <img [src]="user.photo" alt="image de profil">
+    <span>Modifier</span>
+  </div>
+  <div class="profil-delete">
+    <span>Supprimer le profil</span>
+  </div>
+</div>
