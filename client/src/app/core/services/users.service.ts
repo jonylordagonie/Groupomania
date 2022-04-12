@@ -21,7 +21,7 @@ export class UsersService {
     return this.http.get<User>(`http://localhost:3000/api/users/${userId}`);
   }
 
-  addUser(formValue: { nom: string, prenom: string, email: string, password: string }): Observable<User>{
+  register(formValue: { nom: string, prenom: string, email: string, password: string }): Observable<User>{
     return this.http.post<User>(`http://localhost:3000/api/users`, formValue)
   }
 

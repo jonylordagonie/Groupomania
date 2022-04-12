@@ -12,7 +12,7 @@
   }
 
   .form-container {
-    width: 100%;
+    width: 100vh;
     display: flex;
     flex-direction: column;
     gap: 3vh;
@@ -22,32 +22,51 @@
 
   .form-group {
     display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 2.5vh;
+    flex-direction: column;
 
-    label {
+    .form-saisie{
       display: flex;
-      justify-content: flex-end;
-      width: 20vh;
-      margin-right: 3vh;
-    }
+      justify-content: center;
+      align-items: center;
 
-    input {
-      height: 4vh;
-      font-size: 2.5vh;
+      label {
+        display: flex;
+        justify-content: flex-end;
+        width: 20vh;
+        margin-right: 3vh;
+      }
+      
+      input {
+        height: 4vh;
+        font-size: 2.5vh;
+        width: 70%;
+      }
+    }
+    .error{
+      color: red;
       width: 60%;
+      text-align: center;
+      margin: 0 auto;
+      margin-top: 1.5vh;
+      text-decoration: underline;
+      font-size: 2vh;
+
     }
   }
 }
 
 .action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .btn {
     line-height: 50px;
     height: 50px;
     text-align: center;
     width: 250px;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   button {
@@ -104,10 +123,6 @@
     z-index: 1;
     transition: all 0.3s;
     background-color: rgba(0, 255, 0, 0.1);
-    &:disabled {
-      background-color: rgba(grey, 0.1);
-      cursor: default;
-    }
   }
 
   .btn-one:hover::after {

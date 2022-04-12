@@ -38,7 +38,7 @@ export class ModifyProfilComponent implements OnInit {
   }
 
   onSubmit(): void{
-    this.userService.addUser(this.modifyProfilForm.value).pipe(
+    this.userService.register(this.modifyProfilForm.value).pipe(
       tap(() => {
         this.router.navigateByUrl('/index'), 
         this.auth.login();
