@@ -2,11 +2,32 @@ const Joi = require('joi')
 
 const userValidation = (body) => {
   const UserShema = Joi.object({
-    nom: Joi.string().min(3).max(40).trim().required(),
-    prenom: Joi.string().min(3).max(40).trim().required(),
-    email: Joi.string().min(10).max(40).trim().required(),
-    password: Joi.string().min(8).max(40).trim().required(),
-    photo: Joi.string().min(15).max(100).trim(),
+    nom: Joi.string()
+      .regex(/^[a-zA-ZÀ-ÿ -]{2,40}$/)
+      .message("Nom non valid")
+      .trim()
+      .required(),
+    prenom: Joi.string()
+      .regex(/^[a-zA-ZÀ-ÿ -]{2,40}$/)
+      .trim()
+      .required(),
+    email: Joi.string()
+      .lowercase(true)
+      .trim(true)
+      .regex(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+      .message("email non valable")
+      .required(),
+    password: Joi.string()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/
+      )
+      .trim()
+      .required(),
+    photo: Joi.string()
+      .regex(
+        /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i
+      )
+      .trim(),
   });
   return UserShema.validate(body)
 }

@@ -16,6 +16,7 @@ import { tap } from 'rxjs';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   emailRegex!: RegExp;
+  nameRegex!: RegExp;
   passwordRegex!: RegExp;
 
   constructor(private auth: AuthService,
@@ -24,11 +25,12 @@ export class RegisterComponent implements OnInit {
               private userService: UsersService) { }
 
   ngOnInit(): void {
-    this.emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
-    this.passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/
+    this.emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/;
+    this.nameRegex = /^[a-zA-ZÀ-ÿ -]{2,40}$/;
     this.registerForm = this.formBuilder.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
+      nom: ['', [Validators.required, Validators.pattern(this.nameRegex)]],
+      prenom: ['', [Validators.required, Validators.pattern(this.nameRegex)]],
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       password: ['', [Validators.required, Validators.pattern(this.passwordRegex)]]
     }, {

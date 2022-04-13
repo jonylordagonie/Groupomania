@@ -5,6 +5,7 @@ import { LangingPageComponent } from './components/langing-page/langing-page.com
 
 
 
+
 @NgModule({
   declarations: [
     LangingPageComponent

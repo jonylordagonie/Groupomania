@@ -8,6 +8,7 @@ import { AuthentificatedModule } from './authentificated/authentificated.module'
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './guest/auth/auth.module';
 import { LandingPageModule } from './guest/landing-page/landing-page.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { LandingPageModule } from './guest/landing-page/landing-page.module';
     AuthModule,
     HttpClientModule,
     AuthentificatedModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

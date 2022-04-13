@@ -1,18 +1,15 @@
 const User = require('../models/user.model')
 const UserModify = require("../models/user.model");
+const bcrypt = require ("bcrypt")
 const userValidation = require('../utils/userValidation.utils')
 const userModifyValidation = require('../utils/userModifyValidation.utils')
 
 class UserController {
-  // getAllUsers = (req, res, next) => {
-  //   db.query("SELECT * FROM users", (err, results, fields) => {
-  //     !err ? res.json(results) : res.json({ err });
-  //   });
-  // };
-
   getAllUsers = (req, res, next) => {
     User.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"]
+      },
     })
       .then((users) => {
         res.status(200).json(users);
@@ -23,7 +20,9 @@ class UserController {
   getUserById = (req, res, next) => {
     const { id } = req.params;
     User.findByPk(id, {
-      attributes: { exclude: ["createdAt", "updatedAt"] },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"]
+      },
     })
       .then((user) => {
         if (!user) return res.status(404).json({ msg: "User not found !" });
@@ -57,10 +56,17 @@ class UserController {
     const { body } = req;
     const { error } = userValidation(body);
     if (error) return res.status(401).json(error.details[0].message);
-
-    User.create({ ...body })
-      .then(() => res.status(201).json({ msg: "user created !" }))
-      .catch((error) => res.status(500).json(error));
+    bcrypt
+      .hash(req.body.password, 10)
+      .then((hash) => {
+        User.create({
+          ...body,
+          password: hash
+        })
+          .then(() => res.status(201).json({ msg: "user created !" }))
+          .catch((error) => res.status(500).json(error));
+    })
+    
   };
 
   DeleteUser = (req, res, next) => {
