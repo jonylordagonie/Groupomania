@@ -55,18 +55,20 @@ class UserController {
   addUser = (req, res, next) => {
     const { body } = req;
     const { error } = userValidation(body);
-    if (error) return res.status(401).json(error.details[0].message);
-    bcrypt
-      .hash(req.body.password, 10)
-      .then((hash) => {
-        User.create({
-          ...body,
-          password: hash
+    if (error) {
+      return res.status(401).json(error.details[0].message);
+    } else {
+      bcrypt
+        .hash(req.body.password, 10)
+        .then((hash) => {
+          User.create({
+            ...body,
+            password: hash
+          })
+            .then(() => res.status(201).json({ msg: "user created !" }))
+            .catch((error) => res.status(500).json(error));
         })
-          .then(() => res.status(201).json({ msg: "user created !" }))
-          .catch((error) => res.status(500).json(error));
-    })
-    
+    }
   };
 
   DeleteUser = (req, res, next) => {

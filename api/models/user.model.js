@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database");
 
 const User = sequelize.define("user", {
-  nom: { type: DataTypes.STRING, allowNull: false },
+  nom: { type: DataTypes.STRING, allowNull: false},
   prenom: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false , unique: true},
   password: { type: DataTypes.STRING, allowNull: false },
@@ -21,5 +21,7 @@ const User = sequelize.define("user", {
   }, {
    tableName : 'users'
 });
+
+(async () => { await sequelize.sync() });
 
 module.exports = User;

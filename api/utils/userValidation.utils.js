@@ -3,20 +3,21 @@ const Joi = require('joi')
 const userValidation = (body) => {
   const UserShema = Joi.object({
     nom: Joi.string()
-      .regex(/^[a-zA-ZÀ-ÿ -]{2,40}$/)
-      .message("Nom non valid")
       .trim()
+      .lowercase()
       .required(),
+    
     prenom: Joi.string()
       .regex(/^[a-zA-ZÀ-ÿ -]{2,40}$/)
       .trim()
       .required(),
     email: Joi.string()
-      .lowercase(true)
-      .trim(true)
-      .regex(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-      .message("email non valable")
+      
+      .lowercase()
+      .trim()
+      .email({minDomainSegments: 2})
       .required(),
+    
     password: Joi.string()
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/
