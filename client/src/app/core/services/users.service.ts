@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   login(formValue: {email: string, password: string }): Observable<User> {
-        return this.http.post<User>(`http://localhost:3000/api/users`, { formValue })
+        return this.http.post<User>(`http://localhost:3000/api/users`,  formValue)
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user))

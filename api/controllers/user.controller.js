@@ -8,7 +8,7 @@ class UserController {
   getAllUsers = (req, res, next) => {
     User.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
+        exclude: ["createdAt", "updatedAt"],
       },
     })
       .then((users) => {
@@ -21,7 +21,7 @@ class UserController {
     const { id } = req.params;
     User.findByPk(id, {
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
+        exclude: ["createdAt", "updatedAt"],
       },
     })
       .then((user) => {
@@ -55,32 +55,52 @@ class UserController {
   addUser = (req, res, next) => {
     const { body } = req;
     const { error } = userValidation(body);
-    if (error) {
-      return res.status(401).json(error.details[0].message);
-    } else {
-      bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-          User.create({
-            ...body,
-            password: hash
-          })
-            .then(() => res.status(201).json({ msg: "user created !" }))
-            .catch((error) => res.status(500).json(error));
+    if (error) return res.status(401).json(error.details[0].message);
+      bcrypt.hash(req.body.password, 10).then((hash) => {
+        User.create({
+          ...body,
+          password: hash,
         })
-    }
+          .then(() => res.status(201).json({ msg: "user created !" }))
+          .catch((error) => res.status(500).json(error));
+      });
   };
 
   DeleteUser = (req, res, next) => {
     const { id } = req.params;
     User.destroy({ where: { id: id } })
-      .then(ressource => {
-        if (ressource === 0) return res.status(404).json({ msg: "Not found !" })
-        res.status(200).json({msg : "User delted !"})
+      .then((ressource) => {
+        if (ressource === 0)
+          return res.status(404).json({ msg: "Not found !" });
+        res.status(200).json({ msg: "User delted !" });
       })
       .catch((error) => res.status(500).json(error));
   };
-        
+
+  loggin = (req, res, next) => {
+    User.findByPk(req.body.email)
+      .then((user) => {
+        if (!user) return res.status(404).json({ msg: "Email not found !" });
+        bcrypt
+          .compare(req.body.password, user.password) // On hash le mdp et on compare au hash de la db
+          .then((valid) => {
+            if (!valid) { // non valide
+              return res
+                .status(401)
+                .json({ message: "Mot de passe incorrect !" });
+            }
+            res.status(200).json({ //valide
+              userId: user._id,
+              token: jwt.sign({ userId: user._id }, tokenkey, {  // ont donne un token crypté par notre clé token
+                expiresIn: "24h",                                // Utilisable 24h
+              }),
+            });
+          })
+          .catch((error) => res.status(500).json({ error }));
+      })
+      .catch((error) => res.status(500).json({ error }));
+  };
+
 }
 
 module.exports = new UserController();
