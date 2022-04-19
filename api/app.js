@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const db = require('./database')
 const usersRouter = require('./routes/users')
+const forumRouter = require("./routes/forum");
+const responseRouter = require("./routes/responses");
 
 app = express();
 
@@ -27,5 +29,7 @@ app.use((req, res, next) => {
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use('/api/users', usersRouter);
+app.use("/api/forum", forumRouter);
+app.use('/api/responses', responseRouter);
 
 module.exports = app;

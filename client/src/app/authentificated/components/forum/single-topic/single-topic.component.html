@@ -1,0 +1,21 @@
+<div class="container" *ngIf="topic$ | async as topic">
+  <div class="title-container">
+    <h1>{{ topic.title }}</h1>
+    <p><span class="author">{{ topic.author }}</span> le {{ topic.date }}</p>
+  </div>
+  <div class="topic-content">
+    <p>{{ topic.content }}</p>
+  </div>
+  <div class="responses-container">
+
+  </div>
+  <form [formGroup]="responseForm" (ngSubmit)="onResponse()">
+    <label for="response">Répondre à ce sujet:</label>
+    <textarea id="response" formControlName="response" placeholder="Entrez votre message ici..." style="color: #000"></textarea>
+    <div class="action-buttons">
+      <button type="submit" class="btn btn-one" [disabled]="!responseForm.valid">
+        <span>Valider</span>
+      </button>
+    </div>
+  </form>
+</div>

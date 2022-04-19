@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Forum</h2>
+  <div class="topic-container">
+    <div class="categories">
+      <span class="title">Titre</span>
+      <span>Dernier message</span>
+    </div>
+  <app-topic-list *ngFor="let topic of topics$ | async" [topic]="topic"></app-topic-list>
+  </div>
+</div>

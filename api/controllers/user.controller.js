@@ -55,15 +55,28 @@ class UserController {
   addUser = (req, res, next) => {
     const { body } = req;
     const { error } = userValidation(body);
-    if (error) return res.status(401).json(error.details[0].message);
-      bcrypt.hash(req.body.password, 10).then((hash) => {
-        User.create({
-          ...body,
-          password: hash,
-        })
-          .then(() => res.status(201).json({ msg: "user created !" }))
-          .catch((error) => res.status(500).json(error));
-      });
+    const email = req.body.email;
+    User.findOne({ where: { email } })
+      .then((user) => {
+        if (!user) {
+          if (error) {
+            if (error.details[0].message.includes('password')) {
+              return res.status(500).json({ msg: 'Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 numéro et 1 caractère spécial' });
+            }
+              return res.status(500).json(error.details[0].message);
+          }
+          bcrypt.hash(req.body.password, 10).then((hash) => {
+            User.create({
+              ...body,
+              password: hash,
+            })
+              .then(() => res.status(201).json({ msg: "user created !" }))
+              .catch((error) => res.status(500).json(error));
+          });
+        } else {
+          res.status(500).json({ msg: "Email déjà utilisé" })
+        }
+      })
   };
 
   DeleteUser = (req, res, next) => {

@@ -1,0 +1,15 @@
+<a (click)="onViewTopic()">
+  <div class="topic-card">
+    <div class="img">
+      <i class="fa-solid fa-folder-open fa-4x"></i>
+    </div>
+    <div class="info">
+      <h2>{{ topic.title | titlecase}}</h2>
+      <p><span class="author">{{ topic.author | titlecase}}</span> le {{ topic.date}}</p>
+    </div>
+    <div class="content">
+      <span class="author">{{ topic.author | titlecase}}</span>
+      <p>Le {{ topic.date }}</p>
+    </div>
+  </div>
+</a>

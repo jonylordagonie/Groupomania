@@ -18,6 +18,9 @@ export class RegisterComponent implements OnInit {
   emailRegex!: RegExp;
   nameRegex!: RegExp;
   passwordRegex!: RegExp;
+  errormsg: any;
+  erroremail: any;
+  errorpassword: any;
 
   constructor(private auth: AuthService,
               private router: Router,
@@ -25,14 +28,15 @@ export class RegisterComponent implements OnInit {
               private userService: UsersService) { }
 
   ngOnInit(): void {
-    this.emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    this.passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/;
-    this.nameRegex = /^[a-zA-ZÀ-ÿ -]{2,40}$/;
+    // this.emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    // this.passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/;
+    // this.nameRegex = /^[a-zA-ZÀ-ÿ -]{2,40}$/;
+
     this.registerForm = this.formBuilder.group({
-      nom: ['', [Validators.required, Validators.pattern(this.nameRegex)]],
-      prenom: ['', [Validators.required, Validators.pattern(this.nameRegex)]],
-      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
-      password: ['', [Validators.required, Validators.pattern(this.passwordRegex)]]
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     }, {
       updateOn: 'change'
     });
@@ -46,7 +50,23 @@ export class RegisterComponent implements OnInit {
         this.auth.login(),
         this.router.navigateByUrl('/index');
       })
-    ).subscribe();
+    ).subscribe(
+      (res) => { console.log(res) },
+      // (error) => { console.log(error.error.errors[0].message) }
+      (error) => {
+        this.errormsg = error.error
+        if (this.errormsg.msg.toString().includes('Email')) {
+          this.erroremail = this.errormsg.msg.toString().includes('Email')
+        }
+        if (this.errormsg.msg.toString().includes('passe')) {
+          this.errorpassword = this.errormsg.msg.toString().includes('passe')
+        }
+        console.log(this.errormsg)
+      }
+    );
   }
 
 }
+
+
+

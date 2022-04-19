@@ -4,6 +4,7 @@ const userValidation = (body) => {
   const UserShema = Joi.object({
     nom: Joi.string()
       .regex(/^[a-zA-ZÀ-ÿ -]{2,40}$/)
+      .lowercase()
       .trim()
       .required(),
 

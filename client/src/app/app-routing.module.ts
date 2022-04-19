@@ -4,6 +4,7 @@ import { LangingPageComponent } from './guest/landing-page/components/langing-pa
 
 
 const routes: Routes = [
+  { path: 'forum', loadChildren: () => import('./authentificated/components/forum/forum.module').then(m => m.ForumModule)},
   {path: '', component: LangingPageComponent}
 ];
 
