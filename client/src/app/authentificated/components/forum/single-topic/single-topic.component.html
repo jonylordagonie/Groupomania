@@ -7,11 +7,19 @@
     <p>{{ topic.content }}</p>
   </div>
   <div class="responses-container">
-
+    <div class="response" *ngFor="let response of responses$ | async">
+      <div class="response-img">
+        <img src="https://media-public.canva.com/p_zfs/MADhHwp_zfs/3/t.png" alt="write icon">
+      </div>
+      <div class="response-content">
+      <p>{{ response.content}}</p>
+      <p class="postedby"><span class="author">{{ response.author }}</span> le {{ response.date }}</p>
+      </div>
+    </div>
   </div>
   <form [formGroup]="responseForm" (ngSubmit)="onResponse()">
-    <label for="response">Répondre à ce sujet:</label>
-    <textarea id="response" formControlName="response" placeholder="Entrez votre message ici..." style="color: #000"></textarea>
+    <label for="content">Répondre à ce sujet:</label>
+    <textarea id="content" formControlName="content" placeholder="Entrez votre message ici..." style="color: #000"></textarea>
     <div class="action-buttons">
       <button type="submit" class="btn btn-one" [disabled]="!responseForm.valid">
         <span>Valider</span>

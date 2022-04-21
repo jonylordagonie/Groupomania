@@ -8,16 +8,20 @@ import { Response } from "src/app/models/response.model";
   providedIn: 'root'
 })
 
-export class ForumService {
+export class ResponseService {
   Responses!: Response[];
 
   constructor(private http: HttpClient){}
 
   getAllResponses(): Observable<Response[]>{
-    return this.http.get<Response[]>(`http://localhost:3000/api/forum`);
+    return this.http.get<Response[]>(`http://localhost:3000/api/responses`);
   }
 
-  getTopicById(topicId: number): Observable<Response>{
-    return this.http.get<Response>(`http://localhost:3000/api/forum/${topicId}`);
+  getAllResponsesByTopicId(topicId: number): Observable<Response[]>{
+    return this.http.get<Response[]>(`http://localhost:3000/api/responses/${topicId}`)
+  }
+
+  addResponse(formValue: { content: string, topicId: number}): Observable<Response>{
+    return this.http.post<Response>(`http://localhost:3000/api/responses`, formValue)
   }
 }

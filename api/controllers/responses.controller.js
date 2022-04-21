@@ -6,8 +6,7 @@ class ResponsesController {
     const { body } = req;
     const { error } = responseValidation(body);
     if (error) return res.status(401).json(error.details[0].message);
-    response
-      .create({
+    Response.create({
         ...body,
       })
       .then(() => res.status(201).json({ msg: "Response created !" }))
@@ -16,6 +15,22 @@ class ResponsesController {
 
   getAllResponses = (req, res, next) => {
     Response.findAll({
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    })
+      .then((responses) => {
+        res.status(200).json(responses);
+      })
+      .catch((error) => res.status(500).json(error));
+  };
+
+  findResponsesByTopicId = (req, res, next) => {
+    const { id } = req.params;
+    Response.findAll({
+      where: {
+        topicID: id
+      },
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
