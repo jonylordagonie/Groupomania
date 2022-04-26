@@ -6,6 +6,7 @@ import { ForumRoutingModule } from './forum-routing.module';
 import { TopicListComponent } from './topic-list/topic-list.component';
 import { SingleTopicComponent } from './single-topic/single-topic.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewTopicComponent } from './new-topic/new-topic.component';
 
 
 
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ForumComponent,
     TopicListComponent,
-    SingleTopicComponent
+    SingleTopicComponent,
+    NewTopicComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     ForumComponent,
     TopicListComponent,
-    SingleTopicComponent
+    SingleTopicComponent,
+    NewTopicComponent,
   ]
 })
 export class ForumModule { }

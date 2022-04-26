@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService,
               private router: Router,
               private formBuilder: FormBuilder,
-              private userService: UsersService) { }
+              private userService: UsersService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     // this.emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -45,23 +46,27 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onregister(): void{
-    this.userService.register(this.registerForm.value).pipe(
+    this.authService.register(this.registerForm.value).pipe(
       tap(() => {
-        this.auth.login(),
+        //this.auth.login(),
         this.router.navigateByUrl('/index');
       })
     ).subscribe(
       (res) => { console.log(res) },
-      // (error) => { console.log(error.error.errors[0].message) }
+      //(error) => { console.log(error.error) },
       (error) => {
         this.errormsg = error.error
-        if (this.errormsg.msg.toString().includes('Email')) {
-          this.erroremail = this.errormsg.msg.toString().includes('Email')
+        if (this.errormsg.lenght = 0){
+          
+        } else {
+          if (this.errormsg.msg.toString().includes('Email')) {
+            this.erroremail = this.errormsg.msg.toString().includes('Email')
+          }
+          if (this.errormsg.msg.toString().includes('passe')) {
+            this.errorpassword = this.errormsg.msg.toString().includes('passe')
+          }
+          console.log(this.errormsg)
         }
-        if (this.errormsg.msg.toString().includes('passe')) {
-          this.errorpassword = this.errormsg.msg.toString().includes('passe')
-        }
-        console.log(this.errormsg)
       }
     );
   }

@@ -38,12 +38,12 @@ export class ModifyProfilComponent implements OnInit {
   }
 
   onSubmit(): void{
-    this.userService.register(this.modifyProfilForm.value).pipe(
-      tap(() => {
-        this.router.navigateByUrl('/index'), 
-        this.auth.login();
-      })
-    ).subscribe();
+    // this.userService.register(this.modifyProfilForm.value).pipe(
+    //   tap(() => {
+    //     this.router.navigateByUrl('/index'), 
+    //     this.auth.login();
+    //   })
+    // ).subscribe();
   }
 
 }

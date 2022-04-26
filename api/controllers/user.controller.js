@@ -1,8 +1,11 @@
-const User = require('../models/user.model')
+require("dotenv").config();
+const User = require("../models/user.model");
 const UserModify = require("../models/user.model");
-const bcrypt = require ("bcrypt")
-const userValidation = require('../utils/userValidation.utils')
-const userModifyValidation = require('../utils/userModifyValidation.utils')
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const tokenkey = process.env.TOKEN;
+const userValidation = require("../utils/userValidation.utils");
+const userModifyValidation = require("../utils/userModifyValidation.utils");
 
 class UserController {
   getAllUsers = (req, res, next) => {
@@ -56,27 +59,30 @@ class UserController {
     const { body } = req;
     const { error } = userValidation(body);
     const email = req.body.email;
-    User.findOne({ where: { email } })
-      .then((user) => {
-        if (!user) {
-          if (error) {
-            if (error.details[0].message.includes('password')) {
-              return res.status(500).json({ msg: 'Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 numéro et 1 caractère spécial' });
-            }
-              return res.status(500).json(error.details[0].message);
+    User.findOne({ where: { email } }).then((user) => {
+      if (!user) {
+        if (error) {
+          if (error.details[0].message.includes("password")) {
+            return res
+              .status(500)
+              .json({
+                msg: "Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 numéro et 1 caractère spécial",
+              });
           }
-          bcrypt.hash(req.body.password, 10).then((hash) => {
-            User.create({
-              ...body,
-              password: hash,
-            })
-              .then(() => res.status(201).json({ msg: "user created !" }))
-              .catch((error) => res.status(500).json(error));
-          });
-        } else {
-          res.status(500).json({ msg: "Email déjà utilisé" })
+          return res.status(500).json(error.details[0].message);
         }
-      })
+        bcrypt.hash(req.body.password, 10).then((hash) => {
+          User.create({
+            ...body,
+            password: hash,
+          })
+            .then(() => res.status(201).json({ msg: "user created !" }))
+            .catch((error) => res.status(500).json(error));
+        });
+      } else {
+        res.status(500).json({ msg: "Email déjà utilisé" });
+      }
+    });
   };
 
   DeleteUser = (req, res, next) => {
@@ -91,29 +97,33 @@ class UserController {
   };
 
   loggin = (req, res, next) => {
-    User.findByPk(req.body.email)
+    const email = req.body.email;
+    const password = req.body.password;
+    User.findOne({ where: { email: email } })
       .then((user) => {
         if (!user) return res.status(404).json({ msg: "Email not found !" });
         bcrypt
-          .compare(req.body.password, user.password) // On hash le mdp et on compare au hash de la db
+          .compare(password, user.password) // On hash le mdp et on compare au hash de la db
           .then((valid) => {
-            if (!valid) { // non valide
-              return res
-                .status(401)
-                .json({ message: "Mot de passe incorrect !" });
+            if (!valid) {
+              // non valide
+              return res.status(401).json({ message: "Mot de passe incorrect !" });
             }
-            res.status(200).json({ //valide
-              userId: user._id,
-              token: jwt.sign({ userId: user._id }, tokenkey, {  // ont donne un token crypté par notre clé token
-                expiresIn: "24h",                                // Utilisable 24h
-              }),
+          
+            return res.status(200).json({ message: "ok",
+              //valide
+              userId: user.id,
+              token: jwt.sign(
+              { userId: user.id },
+              tokenkey,
+              { expiresIn: "24h", }
+              )
             });
           })
           .catch((error) => res.status(500).json({ error }));
       })
       .catch((error) => res.status(500).json({ error }));
   };
-
 }
 
 module.exports = new UserController();

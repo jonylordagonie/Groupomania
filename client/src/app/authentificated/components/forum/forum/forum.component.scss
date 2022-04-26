@@ -9,6 +9,26 @@
     font-size: 3.5vh;
     text-decoration: underline;
   }
+  a{
+    position: absolute;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    top: 10vh;
+    right: 5vh;
+    gap: 1.5vh;
+    i{
+      color: green;
+    }
+    p{
+      height: 1vh;
+      font-size: 2vh;
+      font-weight: 600;
+      text-decoration: underline;
+      color: green;
+    }
+  }
   .categories{
     display: flex;
     justify-content: space-around;

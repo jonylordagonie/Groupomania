@@ -8,7 +8,7 @@ class ResponsesController {
     if (error) return res.status(401).json(error.details[0].message);
     Response.create({
         ...body,
-      })
+    })
       .then(() => res.status(201).json({ msg: "Response created !" }))
       .catch((error) => res.status(500).json(error));
   };

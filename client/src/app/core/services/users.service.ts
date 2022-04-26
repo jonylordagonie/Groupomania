@@ -20,17 +20,4 @@ export class UsersService {
     return this.http.get<User>(`http://localhost:3000/api/users/${userId}`);
   }
 
-  register(formValue: { nom: string, prenom: string, email: string, password: string }): Observable<User>{
-    return this.http.post<User>(`http://localhost:3000/api/users`, formValue)
-  }
-
-  login(formValue: {email: string, password: string }): Observable<User> {
-        return this.http.post<User>(`http://localhost:3000/api/users`,  formValue)
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user))
-                return user;
-            }));
-    }
-
 }

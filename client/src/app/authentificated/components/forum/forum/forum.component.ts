@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { ForumService } from 'src/app/core/services/forum.service';
 import { Topic } from 'src/app/models/topic.model';
 

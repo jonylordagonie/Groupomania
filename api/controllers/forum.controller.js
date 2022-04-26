@@ -1,3 +1,4 @@
+const sequelize = require("../database");
 const Topic = require("../models/topic.model");
 const topicValidation = require("../utils/topicValidation.utils");
 
@@ -32,11 +33,11 @@ class ForumController {
     const { body } = req;
     const { error } = topicValidation(body);
     if (error) return res.status(401).json(error.details[0].message);
-      Topic.create({
-        ...body
-      })
-        .then(() => res.status(201).json({ msg: "Topic created !" }))
-        .catch((error) => res.status(500).json(error));
+    Topic.create({
+      ...body,
+    })
+      .then(() => res.status(201).json({ msg: "Topic created !" }))
+      .catch((error) => res.status(500).json(error));
   };
 
   DeleteTopic = (req, res, next) => {
@@ -46,6 +47,22 @@ class ForumController {
         if (ressource === 0)
           return res.status(404).json({ msg: "Not found !" });
         res.status(200).json({ msg: "Topic delted !" });
+      })
+      .catch((error) => res.status(500).json(error));
+  };
+
+  modifyTopic = (req, res, next) => {
+    const { id } = req.body.id;
+    Topic.findByPk(id)
+      .then((topic) => {
+        if (!topic) return res.status(404).json({ msg: "Topic not found !" });
+        if (error) return res.status(401).json(error.details[0].message);
+        topic.responses += 1;
+        topic
+          .save()
+          .then(() =>
+            res.status(201).json({ msg: "ajout d'une réponse !" })
+          );
       })
       .catch((error) => res.status(500).json(error));
   };

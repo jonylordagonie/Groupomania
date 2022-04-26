@@ -1,4 +1,12 @@
 const Joi = require('joi')
+const db = require('../database')
+
+const lookup = async (email) => {
+  const user = await db.get('user', email);
+  if (!user) {
+    throw new Error('Email déjà utilisé !')
+  }
+}
 
 const userValidation = (body) => {
   const UserShema = Joi.object({

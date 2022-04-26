@@ -1,0 +1,27 @@
+<div class="new-sujet-form-card">
+  <h2>Nouveau Sujet</h2>
+  <form [formGroup]="newTopicForm" (ngSubmit)="onsubmit()">
+    <div class="form-container">
+      <div class="form-group">
+        <div class="form-saisie">
+          <label for="title">Titre:</label>
+          <input type="text" id="title" formControlName="title" placeholder="Entrez le titre de votre sujet ici..." style="color: #000">
+        </div>
+        <span class="error" *ngIf="f['title'].errors">Saisissez un titre !</span>
+      </div>
+      <div class="form-group">
+        <div class="form-saisie sujet-content">
+          <label for="content">Contenu:</label>
+          <textarea type="text" id="content" formControlName="content" placeholder="Mettez le contenu de votre sujet ici..."
+            style="color: #000"></textarea>
+        </div>
+        <span class="error" *ngIf="f['content'].errors">Ecrivez votre sujet ici !</span>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button type="submit" class="btn btn-one" [disabled]="!newTopicForm.valid">
+        <span>Valider</span>
+      </button>
+    </div>
+  </form>
+</div>

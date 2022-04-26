@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UsersService } from 'src/app/core/services/users.service';
 
@@ -14,7 +13,7 @@ import { UsersService } from 'src/app/core/services/users.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private auth: AuthService,
+  constructor(private authService: AuthService,
               private router: Router,
               private formBuilder: FormBuilder,
               private userService: UsersService) { }
@@ -24,17 +23,17 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     }, {
-      updateOn: 'submit'
+      updateOn: 'change'
     });
   }
 
+  get f() { return this.loginForm.controls; }
+
   onLogin(): void{
-    this.userService.login(this.loginForm.value).pipe(
-      tap(() => {
-        this.auth.login(),
-        this.router.navigateByUrl('/index');
-      })
-    ).subscribe();
+    this.authService.login(this.loginForm.value).subscribe(() => {
+      console.log('User Logged'),
+      this.router.navigateByUrl('/index')
+    })
   }
 
 }

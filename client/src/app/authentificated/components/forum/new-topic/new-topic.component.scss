@@ -1,4 +1,4 @@
-.login-form-card {
+.new-sujet-form-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,12 +37,20 @@
         margin-right: 3vh;
       }
 
-      input {
+      input, textarea{
         height: 4vh;
         font-size: 2.5vh;
         width: 70%;
       }
     }
+    .sujet-content {
+      display: flex;
+      align-items: flex-start;
+      textarea{
+        height: 20vh;
+      }
+    }
+    
 
     .error {
       color: red;
