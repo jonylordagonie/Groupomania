@@ -40,9 +40,9 @@ export class SingleTopicComponent implements OnInit {
     const topicId = +this.route.snapshot.params['id']
     const content = this.responseForm.value.content
     const value = { content, topicId }
-    this.responseService.addResponse(value).subscribe(
-      () => location.reload(),
-    )
+    console.log(topicId)
+    //this.responseService.addResponse(value).subscribe()
+    this.forumService.changeTopicResponses(topicId).subscribe(  () => location.reload() )
   }
 
 }

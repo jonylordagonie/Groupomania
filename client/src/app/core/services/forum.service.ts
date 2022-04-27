@@ -23,4 +23,9 @@ export class ForumService {
   addTopic(formValue: {title: string, content: string}): Observable<Topic>{
     return this.http.post<Topic>(`http://localhost:3000/api/forum`, formValue)
   }
+
+  changeTopicResponses(topicId: number): Observable<Topic> {
+    return this.http.put<Topic>(`http://localhost:3000/api/forum/${topicId}`, topicId);
+  }
+
 }

@@ -6,7 +6,7 @@ const responsesController =require('../controllers/responses.controller')
 
 router.get("/", forumController.getAllTopics);
 router.get("/:id", forumController.getTopicById);
-router.put("/", forumController.modifyTopic);
+router.put("/:id", forumController.modifyTopic);
 router.post("/", forumController.addTopic);
 router.delete("/:id", forumController.DeleteTopic);
 

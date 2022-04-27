@@ -52,19 +52,16 @@ class ForumController {
   };
 
   modifyTopic = (req, res, next) => {
-    const { id } = req.body.id;
+    const { id } = req.params;
     Topic.findByPk(id)
-      .then((topic) => {
-        if (!topic) return res.status(404).json({ msg: "Topic not found !" });
-        if (error) return res.status(401).json(error.details[0].message);
-        topic.responses += 1;
-        topic
-          .save()
-          .then(() =>
-            res.status(201).json({ msg: "ajout d'une réponse !" })
-          );
-      })
-      .catch((error) => res.status(500).json(error));
+        .then((topic) => {
+          if (!topic) return res.status(404).json({ msg: "Topic not found !" });
+          topic.responses += 1;
+          topic
+            .save()
+            .then(() => res.status(201).json({ msg: "ajout d'une réponse !" }));
+        })
+      .catch((error) => {console.log(error), res.status(500).json({error}) });
   };
 }
 
