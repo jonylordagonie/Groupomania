@@ -7,6 +7,6 @@
   </div>
   <div class="profil-image">
     <img [src]="user.photo" alt="image de profil">
-    <span>Modifier le profil</span>
+    <a routerLink="/profil/{{userId$}}/modify" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Modifier le profil</a>
   </div>
 </div>

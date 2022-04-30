@@ -6,7 +6,7 @@ class ForumController {
   getAllTopics = (req, res, next) => {
     Topic.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        //exclude: ["createdAt", "updatedAt"],
       },
     })
       .then((topics) => {
@@ -52,6 +52,7 @@ class ForumController {
   };
 
   modifyTopic = (req, res, next) => {
+    console.log('test')
     const { id } = req.params;
     Topic.findByPk(id)
         .then((topic) => {

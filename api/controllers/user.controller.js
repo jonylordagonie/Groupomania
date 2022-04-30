@@ -1,6 +1,5 @@
 require("dotenv").config();
 const User = require("../models/user.model");
-const UserModify = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const tokenkey = process.env.TOKEN;
@@ -35,11 +34,11 @@ class UserController {
   };
 
   modifyUser = (req, res, next) => {
+    console.log('req')
     const { id } = req.params;
     const { body } = req;
     const { error } = userModifyValidation(body);
-
-    UserModify.findByPk(id)
+    User.findByPk(id)
       .then((user) => {
         if (!user) return res.status(404).json({ msg: "User not found !" });
         if (error) return res.status(401).json(error.details[0].message);
@@ -103,16 +102,18 @@ class UserController {
       .then((user) => {
         if (!user) return res.status(404).json({ msg: "Email not found !" });
         bcrypt
-          .compare(password, user.password) // On hash le mdp et on compare au hash de la db
+          .compare(password, user.password)
           .then((valid) => {
             if (!valid) {
-              // non valide
               return res.status(401).json({ message: "Mot de passe incorrect !" });
             }
           
-            return res.status(200).json({ message: "ok",
-              //valide
+            return res.status(200).json({ message: "Loggued",
               userId: user.id,
+              role: user.role,
+              nom: user.nom,
+              prenom: user.prenom,
+              email: user.email,
               token: jwt.sign(
               { userId: user.id },
               tokenkey,

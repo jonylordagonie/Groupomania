@@ -20,4 +20,12 @@ export class UsersService {
     return this.http.get<User>(`http://localhost:3000/api/users/${userId}`);
   }
 
+  modifyUser(values: { nom: string, prenom: string, email: string }, userId: number): Observable<User>{
+    return this.http.put<User>(`http://localhost:3000/api/users/${userId}`, values)
+  }
+
+  deleteUser(userId: number): Observable<User>{
+    return this.http.delete<User>(`http://localhost:3000/api/users/${userId}`)
+  }
+
 }

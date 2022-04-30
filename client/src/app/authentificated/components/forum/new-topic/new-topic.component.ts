@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ForumService } from 'src/app/core/services/forum.service';
 import { Topic } from 'src/app/models/topic.model';
 
@@ -16,7 +17,8 @@ export class NewTopicComponent implements OnInit {
   
   constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private forumService: ForumService) { }
+    private forumService: ForumService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
       this.newTopicForm = this.formBuilder.group({
@@ -30,7 +32,11 @@ export class NewTopicComponent implements OnInit {
   get f() { return this.newTopicForm.controls; }
 
   onsubmit(): void{
-    this.forumService.addTopic(this.newTopicForm.value).subscribe(
+    const title = this.newTopicForm.value.title
+    const content = this.newTopicForm.value.content
+    const author = `${this.authService.getUser().nom} ${this.authService.getUser().prenom}`
+    const value = {title, content, author}
+    this.forumService.addTopic(value).subscribe(
       () => this.router.navigateByUrl('/forum')
     );
   }

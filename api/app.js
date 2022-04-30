@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(cors());
 
-
+/*
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
   );
   next();
 });
-
+*/
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use('/api/users', usersRouter);

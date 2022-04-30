@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpInterceptorProviders } from './interceptors';
 
 
 
@@ -20,6 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [
     HeaderComponent,
     SideMenuComponent
+  ],
+  providers: [
+    HttpInterceptorProviders
   ]
 })
 export class CoreModule { }

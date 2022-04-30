@@ -21,7 +21,7 @@ export class ResponseService {
     return this.http.get<Response[]>(`http://localhost:3000/api/responses/${topicId}`)
   }
 
-  addResponse(formValue: { content: string, topicId: number}): Observable<Response>{
+  addResponse(formValue: { content: string, topicId: number, author: string}): Observable<Response>{
     return this.http.post<Response>(`http://localhost:3000/api/responses`, formValue)
   }
 }

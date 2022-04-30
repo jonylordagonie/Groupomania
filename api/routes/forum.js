@@ -5,10 +5,10 @@ const auth = require("../middleware/auth.middleware")
 const responsesController =require('../controllers/responses.controller')
 
 router.get("/", forumController.getAllTopics);
-router.get("/:id", forumController.getTopicById);
-router.put("/:id", forumController.modifyTopic);
-router.post("/", forumController.addTopic);
-router.delete("/:id", forumController.DeleteTopic);
+router.get("/:id", auth, forumController.getTopicById);
+router.put("/:id", auth, forumController.modifyTopic);
+router.post("/", auth, forumController.addTopic);
+router.delete("/:id", auth, forumController.DeleteTopic);
 
 
 module.exports = router;
