@@ -1,6 +1,7 @@
 const Response = require("../models/response.model");
 const Topic = require("../models/topic.model")
 const responseValidation = require("../utils/responseValidation.utils");
+const Sequelize = require("sequelize");
 
 class ResponsesController {
   addResponse = (req, res, next) => {
@@ -27,7 +28,17 @@ class ResponsesController {
   getAllResponses = (req, res, next) => {
     Response.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["updatedAt"],
+        include: [
+          [
+            Sequelize.fn(
+              "DATE_FORMAT",
+              Sequelize.col("date"),
+              "Le %d/%m/%Y à %Hh%i"
+            ),
+            "date",
+          ],
+        ],
       },
     })
       .then((responses) => {
@@ -40,10 +51,20 @@ class ResponsesController {
     const { id } = req.params;
     Response.findAll({
       where: {
-        topicID: id
+        topicID: id,
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],
+        include: [
+          [
+            Sequelize.fn(
+              "DATE_FORMAT",
+              Sequelize.col("date"),
+              "Le %d/%m/%Y à %Hh%i"
+            ),
+            "date",
+          ],
+        ],
       },
     })
       .then((responses) => {

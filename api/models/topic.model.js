@@ -9,7 +9,7 @@ const Topic = sequelize.define(
     author: { type: DataTypes.STRING, allowNull: false, defaultValue: "test"},
     content: { type: DataTypes.STRING, allowNull: false },
     responses: { type: DataTypes.DECIMAL, allowNull: false, defaultValue: 0 },
-    date: { type: DataTypes.DATEONLY, allowNull: false, defaultValue: NOW },
+    date: { type: DataTypes.DATE, allowNull: false, defaultValue: NOW },
   },
   {
     tableName: "topics",

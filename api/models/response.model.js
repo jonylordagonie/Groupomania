@@ -8,7 +8,7 @@ const Response = sequelize.define(
     author: { type: DataTypes.STRING, allowNull: false, defaultValue: "test"},
     content: { type: DataTypes.STRING, allowNull: false },
     topicId: { type: DataTypes.DECIMAL, allowNull: false, defaultValue: 0},
-    date: { type: DataTypes.DATEONLY, allowNull: false, defaultValue: NOW },
+    date: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
   {
     tableName: "responses",

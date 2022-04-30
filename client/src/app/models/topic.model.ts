@@ -4,4 +4,5 @@ export class Topic{
   author!: string;
   content!: string;
   date!: Date;
+  updatedAt!: Date;
 }

@@ -16,9 +16,7 @@ export class ForumComponent implements OnInit {
   constructor(private forumService: ForumService) { }
 
   ngOnInit(): void {
-
-    this.topics$ = this.forumService.getAllTopics();
-
+    this.topics$ = this.forumService.getAllTopics(); 
   }
 
 }

@@ -1,11 +1,30 @@
 const sequelize = require("../database");
 const Topic = require("../models/topic.model");
+const Sequelize = require("sequelize")
 const topicValidation = require("../utils/topicValidation.utils");
 
 class ForumController {
   getAllTopics = (req, res, next) => {
     Topic.findAll({
       attributes: {
+        include: [
+          [
+            Sequelize.fn(
+              "DATE_FORMAT",
+              Sequelize.col("date"),
+              "Le %d/%m/%Y à %Hh%i"
+            ),
+            "date",
+          ],
+          [
+            Sequelize.fn(
+              "DATE_FORMAT",
+              Sequelize.col("updatedAt"),
+              "Le %d/%m/%Y à %Hh%i"
+            ),
+            "updatedAt",
+          ],
+        ],
         //exclude: ["createdAt", "updatedAt"],
       },
     })
@@ -20,6 +39,16 @@ class ForumController {
     Topic.findByPk(id, {
       attributes: {
         exclude: ["updatedAt"],
+        include: [
+          [
+            Sequelize.fn(
+              "DATE_FORMAT",
+              Sequelize.col("date"),
+              "Le %d/%m/%Y à %Hh%i"
+            ),
+            "date",
+          ],
+        ],
       },
     })
       .then((topic) => {
