@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ForumService } from 'src/app/core/services/forum.service';
+import { Topic } from 'src/app/models/topic.model';
 
 @Component({
   selector: 'app-index',
@@ -10,16 +13,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class IndexComponent implements OnInit {
 
 
-  constructor(private router: Router,
-              private authService: AuthService) { }
+  topics$!: Observable<Topic[]>;
 
+  constructor(private forumService: ForumService) { }
 
   ngOnInit(): void {
-    
+    this.topics$ = this.forumService.getAllTopics(); 
   }
 
-  onViewProfil() {
-    this.authService.getUser();
-  }
 
 }

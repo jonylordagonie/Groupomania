@@ -1,5 +1,6 @@
 <div class="container" *ngIf="user$ | async as user">
   <h2>Profil</h2>
+  <div class="profil">
   <form [formGroup]="modifyProfilForm" (ngSubmit)="onSubmit()">
     <div class="form-container">
       <div class="form-group">
@@ -27,5 +28,6 @@
   </div>
   <div class="profil-delete">
     <span (click)="onDelete()">Supprimer le profil</span>
+  </div>
   </div>
 </div>

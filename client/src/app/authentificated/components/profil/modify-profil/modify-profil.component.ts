@@ -49,7 +49,6 @@ export class ModifyProfilComponent implements OnInit {
     if (values.email == null || values.email == '') {
       values.email = userinfo.email
     }
-    console.log(values)
     const userId = +this.route.snapshot.params['id']
     this.userService.modifyUser(values, userId)
   }

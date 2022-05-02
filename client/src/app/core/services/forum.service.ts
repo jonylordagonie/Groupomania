@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable, switchMap } from "rxjs";
+import { map, Observable, switchMap, tap } from "rxjs";
 import { Topic } from "src/app/models/topic.model";
 
 @Injectable({
@@ -13,7 +13,19 @@ export class ForumService {
   constructor(private http: HttpClient){}
 
   getAllTopics(): Observable<Topic[]>{
-    return this.http.get<Topic[]>(`http://localhost:3000/api/forum`);
+    return this.http.get<Topic[]>(`http://localhost:3000/api/forum`).pipe(
+      map(results => results.sort(
+        (a, b) => {
+          if (a.updatedAt < b.updatedAt) {
+            return -1;
+          }
+          if (a.updatedAt > b.updatedAt) {
+            return 1;
+          }
+          return 0;
+        }
+      ))
+    )
   }
 
   getTopicById(topicId: number): Observable<Topic>{

@@ -1,6 +1,6 @@
 <div class="container" *ngIf="topic$ | async as topic">
   <div class="title-container">
-    <h1>{{ topic.title }}</h1>
+    <h2>{{ topic.title }}</h2>
     <p><span class="author">{{ topic.author }}</span> le {{ topic.date }}</p>
   </div>
   <div class="topic-content">

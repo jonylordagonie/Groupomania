@@ -6,13 +6,12 @@ a{
   border-bottom: 1px solid #fff;
   display: flex;
   align-items: center;
-  height: 10vh;
   gap: 20px;
-  width: 120vh;
   margin-top: -1px;
   padding: 1vh;
   justify-content: space-between;
-  .img {
+  img {
+    height: 100px;
     i {
       color: rgb(221, 186, 12);
     }
@@ -22,13 +21,8 @@ a{
     width: 100%;
     border-right: 1px solid #fff;
     h2{
-      font-size: 2.2vh;
       font-weight: 600;
     }
-    p{
-      font-size: 1.8vh;
-    }
-    
   }
   .content {
     height: 80%;
@@ -37,12 +31,6 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    span{
-      font-size: 2vh;
-    }
-    p{
-      font-size: 1.8vh;
-    }
   }
   .author {
     font-weight: 600;

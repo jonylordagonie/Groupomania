@@ -5,8 +5,23 @@
 }
 body{
   background-color: #000e21;
-  position: relative;
+  max-width: 1556px;
+  margin: 0 auto;
+  display: block;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  h2 {
+    font-size: 25px;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  p, span, input, label, a, button, textarea{
+    font-size: 18px;
+  }
+  .error{
+    font-size: 16px;
+  }
+}

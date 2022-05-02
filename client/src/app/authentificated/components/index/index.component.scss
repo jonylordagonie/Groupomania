@@ -1,13 +1,17 @@
 .container {
-  margin-top: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  h2 {
-    position: absolute;
-    top: 2vh;
-    font-size: 3.5vh;
-    text-decoration: underline;
+  flex-direction: column;
+  width: 100%;
+  .content{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .separater{
+    height: 1vh;
+    border-right: 1px solid #fff;
   }
 }

@@ -1,14 +1,12 @@
-
 .container{
-  margin-top: 10vh;
-  font-size: 3vh;
   display: flex;
-  justify-content: space-around;
-  h2 {
-    position: absolute;
-    top: 2vh;
-    font-size: 3.5vh;
-    text-decoration: underline;
+  align-items: center;
+  flex-direction: column;
+  .profil{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
   .profil-image{
     display: flex;
@@ -16,16 +14,16 @@
     align-items: center;
     gap: 3vh;
     img{
-      width: 20vh;
-      height: 20vh;
+      width: 120px;
+      height: 120px;
       background: #d9d9d9;
       border-radius: 50%;
-      border: .5vh solid red;
+      border: 3px solid red;
       object-fit: cover;
       object-position: top;
     }
     a{
-      font-size: 2.5vh;
+      font-size: 16px;
       color: green;
       text-decoration: underline;
       cursor: pointer;

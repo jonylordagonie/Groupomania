@@ -3,26 +3,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  h2 {
-    text-decoration: underline;
-    font-size: 3.5vh;
-    position: absolute;
-    top: 2vh;
+  width: 100%;
+  form{
+    width: 100%;
   }
-
   .form-container {
-    width: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 3vh;
-    margin-bottom: 3vh;
-    margin-top: 10vh;
+    gap: 30px;
+    margin: 40px 0 40px 0;
   }
 
   .form-group {
     display: flex;
-    font-size: 2.5vh;
     flex-direction: column;
 
     .form-saisie{
@@ -38,8 +31,7 @@
       }
       
       input {
-        height: 4vh;
-        font-size: 2.5vh;
+        height: 30px;
         width: 70%;
       }
     }
@@ -50,8 +42,6 @@
       margin: 0 auto;
       margin-top: 1.5vh;
       text-decoration: underline;
-      font-size: 2vh;
-
     }
   }
 }
@@ -64,7 +54,7 @@
     line-height: 50px;
     height: 50px;
     text-align: center;
-    width: 250px;
+    width: 50%;
     cursor: pointer;
     margin: 0 auto;
   }
@@ -80,7 +70,6 @@
   }
 
   .btn-one span {
-    font-size: 2vh;
     letter-spacing: .3vh;
     transition: all 0.3s;
   }

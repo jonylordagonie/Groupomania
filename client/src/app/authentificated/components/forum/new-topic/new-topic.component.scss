@@ -3,28 +3,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  h2 {
-    text-decoration: underline;
-    font-size: 3.5vh;
-    position: absolute;
-    top: 2vh;
+  width: 100%;
+  form{
+    width: 100%;
   }
-
   .form-container {
-    width: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 3vh;
-    margin-bottom: 3vh;
-    margin-top: 10vh;
+    gap: 30px;
+    margin: 30px 0;
   }
 
   .form-group {
     display: flex;
-    font-size: 2.5vh;
     flex-direction: column;
-
     .form-saisie {
       display: flex;
       justify-content: center;
@@ -33,13 +26,13 @@
       label {
         display: flex;
         justify-content: flex-end;
-        width: 20vh;
+        width: 5%;
         margin-right: 3vh;
       }
-
+      input{
+        height: 30px;
+      }
       input, textarea{
-        height: 4vh;
-        font-size: 2.5vh;
         width: 70%;
       }
     }
@@ -59,8 +52,6 @@
       margin: 0 auto;
       margin-top: 1.5vh;
       text-decoration: underline;
-      font-size: 2vh;
-
     }
   }
 }
@@ -90,7 +81,6 @@
   }
 
   .btn-one span {
-    font-size: 2vh;
     letter-spacing: .3vh;
     transition: all 0.3s;
   }

@@ -79,20 +79,6 @@ class ForumController {
       })
       .catch((error) => res.status(500).json(error));
   };
-
-  modifyTopic = (req, res, next) => {
-    console.log('test')
-    const { id } = req.params;
-    Topic.findByPk(id)
-        .then((topic) => {
-          if (!topic) return res.status(404).json({ msg: "Topic not found !" });
-          topic.responses += 1;
-          topic
-            .save()
-            .then(() => res.status(201).json({ msg: "ajout d'une réponse !" }));
-        })
-      .catch((error) => {console.log(error), res.status(500).json({error}) });
-  };
 }
 
 module.exports = new ForumController();

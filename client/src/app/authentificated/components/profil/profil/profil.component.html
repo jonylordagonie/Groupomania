@@ -1,12 +1,14 @@
 <div class="container" *ngIf="user$ | async as user">
   <h2>Profil</h2>
-  <div class="inforemations" >
-    <p>Nom: {{ user.nom }}</p>
-    <p>Prénom: {{ user.prenom }}</p>
-    <p>Email: {{ user.email }}</p>
-  </div>
-  <div class="profil-image">
-    <img [src]="user.photo" alt="image de profil">
-    <a routerLink="/profil/{{userId$}}/modify" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Modifier le profil</a>
+  <div class="profil">
+    <div class="inforemations" >
+      <p>Nom: {{ user.nom }}</p>
+      <p>Prénom: {{ user.prenom }}</p>
+      <p>Email: {{ user.email }}</p>
+    </div>
+    <div class="profil-image">
+      <img [src]="user.photo" alt="image de profil">
+      <a routerLink="/profil/{{userId$}}/modify" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Modifier le profil</a>
+    </div>
   </div>
 </div>
