@@ -1,4 +1,4 @@
-// Include Sequelize module.
+const { response } = require("express");
 const { Sequelize, DataTypes, NOW } = require("sequelize");
 const sequelize = require("../database");
 
@@ -15,6 +15,7 @@ const Topic = sequelize.define(
     tableName: "topics",
   }
 );
+
 
 async () => {
   await sequelize.sync();

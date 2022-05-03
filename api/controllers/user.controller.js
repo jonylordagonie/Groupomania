@@ -54,7 +54,7 @@ class UserController {
   };
 
   modifyUser = (req, res, next) => {
-    console.log('req')
+    console.log('back ok')
     const { id } = req.params;
     const { body } = req;
     const { error } = userModifyValidation(body);
@@ -69,7 +69,8 @@ class UserController {
           .save()
           .then(() =>
             res.status(201).json({ msg: "utilisateur modifier avec succès !" })
-          );
+          )
+          .catch((error) => res.status(500).json(error))
       })
       .catch((error) => res.status(500).json(error));
   };

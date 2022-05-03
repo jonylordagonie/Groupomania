@@ -5,6 +5,8 @@ const responsesController = require("../controllers/responses.controller");
 
 router.get("/", auth, responsesController.getAllResponses);
 router.post("/", auth, responsesController.addResponse);
-router.get("/:id", auth, responsesController.findResponsesByTopicId);
+router.get("/forum/:id", auth, responsesController.findResponsesByTopicId);
+router.delete('/:id', auth, responsesController.deleteResponse)
+router.get("/:id", auth, responsesController.findResponsesById);
 
 module.exports = router;

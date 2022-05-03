@@ -18,10 +18,14 @@ export class ResponseService {
   }
 
   getAllResponsesByTopicId(topicId: number): Observable<Response[]>{
-    return this.http.get<Response[]>(`http://localhost:3000/api/responses/${topicId}`)
+    return this.http.get<Response[]>(`http://localhost:3000/api/responses/forum/${topicId}`)
   }
 
   addResponse(formValue: { content: string, topicId: number, author: string}): Observable<Response>{
     return this.http.post<Response>(`http://localhost:3000/api/responses`, formValue)
+  }
+
+  deleteResponce(id: number): Observable<Response>{
+    return this.http.delete<Response>(`http://localhost:3000/api/responses/${id}`)
   }
 }

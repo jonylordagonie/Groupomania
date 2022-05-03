@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ForumService } from 'src/app/core/services/forum.service';
 import { ResponseService } from 'src/app/core/services/response.service';
@@ -24,6 +24,7 @@ export class SingleTopicComponent implements OnInit {
     private formBuilder: FormBuilder,
     private responseService: ResponseService,
     private authService: AuthService,
+    private router: Router
   ) { }
   
   
@@ -44,7 +45,21 @@ export class SingleTopicComponent implements OnInit {
     const content = this.responseForm.value.content
     const author = `${this.authService.getUser().nom} ${this.authService.getUser().prenom}`
     const value = { content, topicId, author }
-    this.responseService.addResponse(value).subscribe(() => location.reload())
+    this.responseService.addResponse(value).subscribe(
+      () => location.reload()
+    )
   }
 
+  onDeleteTopic() {
+    const topicId = +this.route.snapshot.params['id']
+    this.forumService.deleteTopic(topicId).subscribe(
+      () => this.router.navigateByUrl('forum')
+    )
+  }
+
+  onDeleteResponse(id: number) {
+    this.responseService.deleteResponce(id).subscribe(
+      () => location.reload()
+    )
+  }
 }

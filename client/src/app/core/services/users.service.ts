@@ -21,6 +21,7 @@ export class UsersService {
   }
 
   modifyUser(values: { nom: string, prenom: string, email: string }, userId: number): Observable<User>{
+    console.log(values, userId)
     return this.http.put<User>(`http://localhost:3000/api/users/${userId}`, values)
   }
 

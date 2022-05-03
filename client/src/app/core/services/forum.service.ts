@@ -40,4 +40,8 @@ export class ForumService {
     return this.http.put<Topic>(`http://localhost:3000/api/forum/${topicId}`, topicId);
   }
 
+  deleteTopic(topicId: number): Observable<Topic> {
+    return this.http.delete<Topic>(`http://localhost:3000/api/forum/${topicId}`);
+  }
+
 }
