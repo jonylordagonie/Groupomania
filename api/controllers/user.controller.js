@@ -75,6 +75,10 @@ class UserController {
       .catch((error) => res.status(500).json(error));
   };
 
+  test = (req, res, next) => {
+    console.log(req)
+  }
+
   addUser = (req, res, next) => {
     const { body } = req;
     const { error } = userValidation(body);

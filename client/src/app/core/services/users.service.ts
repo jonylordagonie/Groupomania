@@ -22,11 +22,15 @@ export class UsersService {
 
   modifyUser(values: { nom: string, prenom: string, email: string }, userId: number): Observable<User>{
     console.log(values, userId)
-    return this.http.put<User>(`http://localhost:3000/api/users/${userId}`, values)
+    return this.http.get<User>(`http://localhost:3000/api/users/test2/${userId}`)
   }
 
   deleteUser(userId: number): Observable<User>{
     return this.http.delete<User>(`http://localhost:3000/api/users/${userId}`)
+  }
+
+  testUser(userId: number): Observable<User>{
+    return this.http.get<User>(`http://localhost:3000/api/users/test2/${userId}`)
   }
 
 }

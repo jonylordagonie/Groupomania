@@ -50,7 +50,9 @@ export class ModifyProfilComponent implements OnInit {
       values.email = userinfo.email
     }
     const userId = +this.route.snapshot.params['id']
-    this.userService.modifyUser(values, userId)
+    //this.userService.modifyUser(values, userId)
+    const test = "test"
+    this.userService.testUser(userId)
   }
 
   onDelete(): void{
