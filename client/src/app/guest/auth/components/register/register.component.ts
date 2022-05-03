@@ -48,12 +48,10 @@ export class RegisterComponent implements OnInit {
   onregister(): void{
     this.authService.register(this.registerForm.value).pipe(
       tap(() => {
-        //this.auth.login(),
         this.router.navigateByUrl('/index');
       })
     ).subscribe(
       (res) => { console.log(res) },
-      //(error) => { console.log(error.error) },
       (error) => {
         this.errormsg = error.error
         if (this.errormsg.lenght = 0){

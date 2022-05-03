@@ -14,13 +14,13 @@
     right: 2%;
     gap: 5px;
     i{
-      color: green;
+      color: #00C700;
     }
     p{
       font-size: 16px;
       font-weight: 600;
       text-decoration: underline;
-      color: green;
+      color: #00C700;
     }
   }
   .categories{
@@ -37,5 +37,25 @@
   }
   .topic-container{
     width: 100%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .container{
+    margin-top: 20px;
+    h2{
+      font-size: 22px;
+    }
+    .categories{
+      display: none;
+    }
+    a{
+      p{
+        font-size: 14px;
+        font-weight: 400;
+      }
+      i{
+        display: none;
+      }
+    }
   }
 }

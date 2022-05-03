@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UsersService } from 'src/app/core/services/users.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -13,7 +13,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ProfilComponent implements OnInit {
   user$!: Observable<User>;
-  userId$ = Number;
+  userId$!: Number;
+  error!: any;
 
   constructor(private userService: UsersService,
     private route: ActivatedRoute,
@@ -22,7 +23,7 @@ export class ProfilComponent implements OnInit {
   ngOnInit(): void {
     const userId = +this.route.snapshot.params['id'];
     this.userId$ = this.authService.getUser().id
-    this.user$ = this.userService.getUserById(userId);
+    this.user$ = this.userService.getUserById(userId); 
   }
 
 }

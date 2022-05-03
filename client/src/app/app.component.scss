@@ -4,7 +4,9 @@
 
 #side-menu{
   position: absolute;
-  right: -15%;
+  right: -120px;
+  top:0;
+  padding: 0 15px;
 }
 
 .container {
@@ -45,4 +47,7 @@
       height: 112%;
     }
   }
+}
+@media screen and (max-width: 767){
+  
 }

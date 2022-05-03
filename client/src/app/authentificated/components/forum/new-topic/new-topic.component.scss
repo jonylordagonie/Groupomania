@@ -130,3 +130,28 @@
     transform: scale(0.1, 1);
   }
 }
+@media only screen and (max-width: 767px) {
+  .new-sujet-form-card{
+    .form-group{
+      .form-saisie {
+        flex-direction: column;
+        label{
+          justify-content: center;
+        }
+        input, textarea{
+          width: 90%;
+          box-sizing: border-box;
+        }
+      } 
+      .sujet-content {
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .action-buttons {
+    .btn{
+      width: 90%;
+    }
+  }
+}

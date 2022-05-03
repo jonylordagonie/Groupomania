@@ -145,3 +145,57 @@ form{
     transform: scale(0.1, 1);
   }
 }
+@media only screen and (max-width: 767px) {
+  .title-container{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  h2{
+    font-size: 22px;
+    margin: 15px 0;
+  }
+  p{
+    font-size: 16px;
+    margin: 0;
+    span{
+      font-size: 16px;
+    }
+  }
+  img {
+    display: none;
+  }
+  .topic-content{
+    p{
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
+  .response-content{
+    p, span{
+      font-size: 18px;
+      line-height: 20px;
+    }
+    .postedby{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      font-size: 14px;
+      span{
+        font-size: 16px;
+      }
+    }
+  }
+  form{
+    margin-top: 20px;
+    gap: 10px;
+    textarea{
+      box-sizing: border-box;
+    }
+  }
+  .action-buttons{
+    .btn{
+      width: 90%;
+    }
+  }
+}

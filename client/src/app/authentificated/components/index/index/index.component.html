@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Index</h2>
+  <div class="content">
+    <div class="topic-container">
+      <h2>Derniers Sujets</h2>
+      <app-topic-list *ngFor="let topic of topics$ | async" [topic]="topic" ></app-topic-list>
+    </div>
+    <div class="separater"></div>
+    <div class="manias-container">
+      <h2>Derniers Mania's</h2>
+      <app-manias-list></app-manias-list>
+    </div>
+  </div>
+</div>

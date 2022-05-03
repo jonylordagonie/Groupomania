@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  .content{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .topic-container{
+    width: 49%;
+    padding: 0 25px;
+    box-sizing: border-box;
+    h2{
+      text-align: center;
+    }
+  }
+  .separater{
+    border-right: 1px solid #fff;
+  }
+  .manias-container{
+    width: 49%;
+    padding: 0 25px;
+    box-sizing: border-box;
+    h2 {
+      text-align: center;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    h2{
+      font-size: 22px;
+    }
+    .topic-container {
+      width: 100%;
+    }
+    .separater{
+      border-right: none;
+    }
+    .manias-container{
+      width: 100%;
+    }
+  }
+}

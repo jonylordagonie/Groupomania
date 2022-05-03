@@ -1,3 +1,23 @@
+.unauthorized{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: red;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 200px;
+  box-shadow: 17px 17px 26px 10px #000;
+  h2, span{
+    color: #000;
+  }
+  span{
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
 .container{
   display: flex;
   align-items: center;
@@ -24,9 +44,23 @@
     }
     a{
       font-size: 16px;
-      color: green;
+      color: #00C700;
       text-decoration: underline;
       cursor: pointer;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .container{
+    .profil {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      img{
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 }

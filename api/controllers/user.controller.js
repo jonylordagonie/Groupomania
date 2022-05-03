@@ -14,7 +14,14 @@ class UserController {
       },
     })
       .then((users) => {
-        res.status(200).json(users);
+        const token = req.headers.authorization.split(" ")[1];
+        const decodedToken = jwt.verify(token, tokenkey);
+        const role = decodedToken.role;
+        if (role !== "admin") {
+          res.status(401).json({ msg: "Unauthorized request" });
+        } else {
+          res.status(200).json(users);
+        }
       })
       .catch((error) => res.status(500).json(error));
   };
@@ -28,7 +35,20 @@ class UserController {
     })
       .then((user) => {
         if (!user) return res.status(404).json({ msg: "User not found !" });
-        res.status(200).json(user);
+         const token = req.headers.authorization.split(" ")[1];
+         const decodedToken = jwt.verify(token, tokenkey);
+         const role = decodedToken.role;
+        const userId = decodedToken.userId;
+        if (role === "admin")
+        {
+          res.status(200).json(user);
+        } else {
+          if (userId != id) {
+            res.status(401).json({ msg: "Unauthorized request" });
+          } else {
+            res.status(200).json(user);
+          }
+        }
       })
       .catch((error) => res.status(500).json(error));
   };
@@ -115,7 +135,10 @@ class UserController {
               prenom: user.prenom,
               email: user.email,
               token: jwt.sign(
-              { userId: user.id },
+                {
+                  userId: user.id,
+                  role: user.role
+                },
               tokenkey,
               { expiresIn: "24h", }
               )

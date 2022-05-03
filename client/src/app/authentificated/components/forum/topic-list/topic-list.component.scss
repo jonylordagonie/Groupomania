@@ -10,11 +10,9 @@ a{
   margin-top: -1px;
   padding: 1vh;
   justify-content: space-between;
+  box-sizing: border-box;
   img {
     height: 100px;
-    i {
-      color: rgb(221, 186, 12);
-    }
   }
   .info{
     height: 80%;
@@ -34,5 +32,20 @@ a{
   }
   .author {
     font-weight: 600;
+  }
+}
+@media only screen and (max-width: 767px) {
+  img{
+    display: none;
+  }
+  .topic-card{
+    text-align: center;
+    gap: 0;
+    .info{
+      border-right: none;
+    }
+    .content{
+      display: none;
+    }
   }
 }

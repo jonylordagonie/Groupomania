@@ -3,11 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  h2 {
-    position: absolute;
-    top: 2vh;
-    font-size: 3.5vh;
-    text-decoration: underline;
+  flex-direction: column;
+  h2{
+    text-align: center;
   }
   .maintenance{
     background: repeating-linear-gradient(45deg,
@@ -16,7 +14,7 @@
       rgba(black, .7) 10px,
       rgba(black, .7) 20px);
     border-radius: 2%;
-    width: 100%;
+    width: 80%;
     height: 100%;
     text-align: center;
     display: flex;
@@ -24,9 +22,7 @@
     align-items: center;
     flex-direction: column;
     padding: 5%;
-    margin: 2%;
     span {
-      font-size: 3vh;
       text-decoration: underline;
       line-height: 5vh;
       color: black;
@@ -41,5 +37,13 @@
       border-radius: 2%;
       width: 80%;
     }
+  }
+}
+@media only screen and (max-width: 767px) {
+  h2{
+    font-size: 20px;
+  }
+  span{
+    font-size: 16px;
   }
 }

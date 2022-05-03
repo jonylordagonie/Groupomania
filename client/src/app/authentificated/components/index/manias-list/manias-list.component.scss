@@ -1,0 +1,32 @@
+.maintenance {
+  background: repeating-linear-gradient(45deg,
+      rgba(yellow, .7),
+      rgba(yellow, .7) 10px,
+      rgba(black, .7) 10px,
+      rgba(black, .7) 20px);
+  border-radius: 2%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5%;
+  box-sizing: border-box;
+  span {
+    text-decoration: underline;
+    line-height: 5vh;
+    color: black;
+    background: yellow;
+    box-shadow: 5px 5px 15px 5px #000000;
+    font-weight: bold;
+    padding: 0 2%;
+    border-radius: 10px;
+  }
+
+  img {
+    margin-top: 5%;
+    border-radius: 2%;
+    width: 80%;
+  }
+}
