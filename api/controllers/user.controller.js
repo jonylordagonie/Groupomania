@@ -8,76 +8,75 @@ const userModifyValidation = require("../utils/userModifyValidation.utils");
 
 class UserController {
   getAllUsers = (req, res, next) => {
-    User.findAll({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-    })
-      .then((users) => {
-        const token = req.headers.authorization.split(" ")[1];
-        const decodedToken = jwt.verify(token, tokenkey);
-        const role = decodedToken.role;
-        if (role !== "admin") {
-          res.status(401).json({ msg: "Unauthorized request" });
-        } else {
-          res.status(200).json(users);
-        }
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, tokenkey);
+    const userId = decodedToken.id
+    const role = decodedToken.role;
+    if (role === "admin") {
+      User.findAll({
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       })
-      .catch((error) => res.status(500).json(error));
+        .then((users) => {
+          res.status(200).json(users);
+        })
+        .catch((error) => res.status(500).json(error));
+    } else {
+      res.status(401).json({ msg: "Unauthorized request" });
+    }
   };
 
   getUserById = (req, res, next) => {
     const { id } = req.params;
-    User.findByPk(id, {
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-    })
-      .then((user) => {
-        if (!user) return res.status(404).json({ msg: "User not found !" });
-         const token = req.headers.authorization.split(" ")[1];
-         const decodedToken = jwt.verify(token, tokenkey);
-         const role = decodedToken.role;
-        const userId = decodedToken.userId;
-        if (role === "admin")
-        {
-          res.status(200).json(user);
-        } else {
-          if (userId != id) {
-            res.status(401).json({ msg: "Unauthorized request" });
-          } else {
-            res.status(200).json(user);
-          }
-        }
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, tokenkey);
+    const userId = decodedToken.id
+    const role = decodedToken.role;
+    if (role === "admin" || userId == id) {
+      User.findByPk(id, {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       })
-      .catch((error) => res.status(500).json(error));
+        .then((user) => {
+          if (!user) return res.status(404).json({ msg: "User not found !" })
+          res.status(200).json(user);
+        })
+        .catch((error) => res.status(500).json(error));
+    } else {
+      res.status(401).json({ msg: "Unauthorized request" });
+    }
   };
 
   modifyUser = (req, res, next) => {
-    console.log('back ok')
     const { id } = req.params;
     const { body } = req;
     const { error } = userModifyValidation(body);
-    User.findByPk(id)
-      .then((user) => {
-        if (!user) return res.status(404).json({ msg: "User not found !" });
-        if (error) return res.status(401).json(error.details[0].message);
-        user.nom = body.nom;
-        user.prenom = body.prenom;
-        user.email = body.email;
-        user
-          .save()
-          .then(() =>
-            res.status(201).json({ msg: "utilisateur modifier avec succès !" })
-          )
-          .catch((error) => res.status(500).json(error))
-      })
-      .catch((error) => res.status(500).json(error));
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, tokenkey);
+    const userId = decodedToken.id
+    const role = decodedToken.role;
+    if (role === "admin" || userId == id) {
+      User.findByPk(id)
+        .then((user) => {
+          if (!user) return res.status(404).json({ msg: "User not found !" });
+          if (error) return res.status(401).json(error.details[0].message);
+          user.nom = body.nom;
+          user.prenom = body.prenom;
+          user.email = body.email;
+          user
+            .save()
+            .then(() =>
+              res.status(201).json({ msg: "utilisateur modifier avec succès !" })
+            )
+            .catch((error) => res.status(500).json(error))
+        })
+        .catch((error) => res.status(500).json(error));
+    } else {
+      res.status(401).json({ msg: "Unauthorized request" });
+    }
   };
-
-  test = (req, res, next) => {
-    console.log(req)
-  }
 
   addUser = (req, res, next) => {
     const { body } = req;
@@ -111,13 +110,21 @@ class UserController {
 
   DeleteUser = (req, res, next) => {
     const { id } = req.params;
-    User.destroy({ where: { id: id } })
-      .then((ressource) => {
-        if (ressource === 0)
-          return res.status(404).json({ msg: "Not found !" });
-        res.status(200).json({ msg: "User delted !" });
-      })
-      .catch((error) => res.status(500).json(error));
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, tokenkey);
+    const userId = decodedToken.id
+    const role = decodedToken.role;
+    if (role === "admin" || userId == id) {
+      User.destroy({ where: { id: id } })
+        .then((ressource) => {
+          if (ressource === 0)
+            return res.status(404).json({ msg: "Not found !" });
+          res.status(200).json({ msg: "User delted !" });
+        })
+        .catch((error) => res.status(500).json(error));
+    } else {
+      res.status(401).json({ msg: "Unauthorized request" });
+    }
   };
 
   loggin = (req, res, next) => {
