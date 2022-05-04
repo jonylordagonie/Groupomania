@@ -16,6 +16,7 @@ export class ModifyProfilComponent implements OnInit {
   modifyProfilForm!: FormGroup;
   emailRegex!: RegExp;
   user$!: Observable<User>;
+  error!: string;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -24,10 +25,22 @@ export class ModifyProfilComponent implements OnInit {
               private userService: UsersService,) { }
 
   ngOnInit(): void {
+    this.authService.isUser().subscribe(
+      ok => console.log(ok),
+      () => {
+        this.router.navigateByUrl('auth/login')
+      }
+    )
     const userId = +this.route.snapshot.params['id'];
+    this.userService.getUserById(userId).subscribe(
+      () => console.log('req send'),
+      error => {
+        console.log('error:', error.error)
+        this.error = error.error
+        console.log('this.error:', this.error)
+      }
+    )
     this.user$ = this.userService.getUserById(userId);
-
-
     this.modifyProfilForm = this.formBuilder.group({
       nom: [null, ],
       prenom: [null, ],

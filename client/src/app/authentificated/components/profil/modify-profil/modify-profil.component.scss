@@ -1,3 +1,26 @@
+.unauthorized {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: red;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 200px;
+  box-shadow: 17px 17px 26px 10px #000;
+
+  h2,
+  span {
+    color: #000;
+  }
+
+  span {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
 .container {
   display: flex;
   align-items: center;

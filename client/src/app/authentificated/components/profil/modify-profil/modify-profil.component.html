@@ -1,3 +1,7 @@
+<div class="unauthorized" *ngIf="error">
+  <h2>Erreur 401</h2>
+  <span>Bonjour, malheureusement tu n'as pas le droit de consulter ce profil</span>
+</div>
 <div class="container" *ngIf="user$ | async as user">
   <h2>Profil</h2>
   <div class="profil">
@@ -24,10 +28,10 @@
   </form>
   <div class="profil-image">
     <img [src]="user.photo" alt="image de profil">
-    <span>Modifier</span>
+    <span role="button" tabindex="0">Modifier</span>
   </div>
   <div class="profil-delete">
-    <span (click)="onDelete()">Supprimer le profil</span>
+    <span role="button" tabindex="0"  (click)="onDelete()">Supprimer le profil</span>
   </div>
   </div>
 </div>

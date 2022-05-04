@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { Observable, tap } from 'rxjs';
 import { UsersService } from 'src/app/core/services/users.service';
@@ -18,9 +18,16 @@ export class ProfilComponent implements OnInit {
 
   constructor(private userService: UsersService,
     private route: ActivatedRoute,
-   private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.isUser().subscribe(
+      ok => console.log(ok),
+      () => {
+        this.router.navigateByUrl('auth/login')
+      }
+    )
     const userId = +this.route.snapshot.params['id'];
     this.userId$ = this.authService.getUser().id
     this.userService.getUserById(userId).subscribe(

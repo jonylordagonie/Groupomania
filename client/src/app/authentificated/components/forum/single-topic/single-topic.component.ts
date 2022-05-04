@@ -30,6 +30,12 @@ export class SingleTopicComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.authService.isUser().subscribe(
+      ok => console.log(ok),
+      () => {
+        this.router.navigateByUrl('auth/login')
+      }
+    )
     this.responseForm = this.formBuilder.group({
       content: ['', Validators.required],
     }, {

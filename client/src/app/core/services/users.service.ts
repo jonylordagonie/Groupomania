@@ -33,6 +33,4 @@ export class UsersService {
     return this.http.put<User>(`http://localhost:3000/api/users/${userId}`, values)
   }
 
-
-
 }

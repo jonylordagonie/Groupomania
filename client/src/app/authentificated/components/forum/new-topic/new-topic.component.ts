@@ -27,6 +27,13 @@ export class NewTopicComponent implements OnInit {
     }, {
       updateOn: 'change'
     });
+
+    this.authService.isUser().subscribe(
+      ok => console.log(ok),
+      () => {
+        this.router.navigateByUrl('auth/login')
+      }
+    )
   }
 
   get f() { return this.newTopicForm.controls; }

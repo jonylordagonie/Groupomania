@@ -27,6 +27,19 @@ class UserController {
     }
   };
 
+  isUser = (req, res, next) => {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      const decodedToken = jwt.verify(token, tokenkey);
+      const userId = decodedToken.userId
+      if (userId == userId) {
+        res.status(200).json({ msg: "User loggued" });
+      }
+    } catch {
+      res.status(401).json({ msg: 'User not loggued or token expired'});
+    }
+  }
+
   getUserById = (req, res, next) => {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];

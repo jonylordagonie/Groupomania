@@ -15,7 +15,7 @@
       <p>{{ response.content}}</p>
       <p class="postedby"><span class="author">{{ response.author }}</span> {{ response.date }}</p>
       </div>
-      <a (click)="onDeleteResponse( response.id )" class="delete-btn"><img
+      <a (click)="onDeleteResponse( response.id )" class="delete-btn" role="button" tabindex="0"><img
           src="https://cdn.pixabay.com/photo/2014/03/25/15/19/cross-296507_960_720.png" alt="delete"></a>
     </div>
   </div>
@@ -29,5 +29,5 @@
     </div>
   </form>
 </div>
-<a (click)="onDeleteTopic()" class="delete-btn"><img
+<a (click)="onDeleteTopic()" class="delete-btn" role="button" tabindex="0"><img
     src="https://cdn.pixabay.com/photo/2014/03/25/15/19/cross-296507_960_720.png" alt="delete"></a>

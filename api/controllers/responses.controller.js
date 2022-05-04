@@ -104,7 +104,7 @@ class ResponsesController {
     const decodedToken = jwt.verify(token, tokenkey);
     const userId = decodedToken.userId
     const role = decodedToken.role;
-    if (role === "admin" || userId == userId) {
+    if (role === "admin") {
       Response.findAll({
         where: {
           id: id,

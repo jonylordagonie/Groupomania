@@ -5,4 +5,5 @@ export class Topic{
   content!: string;
   date!: Date;
   updatedAt!: Date;
+  responses!: number;
 }

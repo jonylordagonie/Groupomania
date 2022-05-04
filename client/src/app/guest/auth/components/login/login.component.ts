@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
       this.authService.setUser(res)
       this.userId$ = this.authService.getUser().id
       this.router.navigateByUrl(`/profil/${this.userId$}`)
+        .then(
+        ()=>location.reload()
+      )
     },
       error => {
         this.error = error.error.msg

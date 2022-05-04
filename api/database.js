@@ -8,6 +8,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.BD_HOST,
     dialect: 'mysql',
+    timezone: '+02:00'
   }
 );
 

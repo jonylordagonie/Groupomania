@@ -54,4 +54,8 @@ export class AuthService{
     sessionStorage.clear()
   }
 
+  isUser() {
+    return this.http.get('http://localhost:3000/api/users/isUser')
+  }
+
 }

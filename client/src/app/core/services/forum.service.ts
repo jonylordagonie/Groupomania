@@ -27,6 +27,24 @@ export class ForumService {
       ))
     )
   }
+  getLasts(): Observable<Topic[]>{
+    return this.http.get<Topic[]>(`http://localhost:3000/api/forum`).pipe(
+      map(results => {
+        let i = 0
+        if (results.length > 5) {
+          i = results.length - 5
+        } else {
+          i = results.length
+        }
+        const lastTopics = []
+        for (let r = i;  r < results.length; r++){
+          lastTopics.push(results[r])
+        }
+        return lastTopics;
+      })
+    )
+  }
+
 
   getTopicById(topicId: number): Observable<Topic>{
     return this.http.get<Topic>(`http://localhost:3000/api/forum/${topicId}`);
