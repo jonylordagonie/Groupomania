@@ -13,7 +13,7 @@ class ResponsesController {
     const { error } = responseValidation(body);
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       if (error) return res.status(401).json(error.details[0].message);
@@ -37,7 +37,7 @@ class ResponsesController {
   getAllResponses = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       Response.findAll({
@@ -68,7 +68,7 @@ class ResponsesController {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       Response.findAll({
@@ -102,7 +102,7 @@ class ResponsesController {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       Response.findAll({

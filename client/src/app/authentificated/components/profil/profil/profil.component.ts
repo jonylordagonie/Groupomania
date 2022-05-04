@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class ProfilComponent implements OnInit {
   user$!: Observable<User>;
   userId$!: Number;
-  error!: any;
+  error!: string;
 
   constructor(private userService: UsersService,
     private route: ActivatedRoute,
@@ -23,7 +23,15 @@ export class ProfilComponent implements OnInit {
   ngOnInit(): void {
     const userId = +this.route.snapshot.params['id'];
     this.userId$ = this.authService.getUser().id
-    this.user$ = this.userService.getUserById(userId); 
+    this.userService.getUserById(userId).subscribe(
+      () => console.log('req send'),
+      error => {
+        console.log('error:', error.error)
+        this.error = error.error
+        console.log('this.error:', this.error)
+      }
+    )
+    this.user$ = this.userService.getUserById(userId)
   }
 
 }

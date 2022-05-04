@@ -10,7 +10,7 @@ class UserController {
   getAllUsers = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin") {
       User.findAll({
@@ -31,7 +31,7 @@ class UserController {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == id) {
       User.findByPk(id, {
@@ -55,13 +55,13 @@ class UserController {
     const { error } = userModifyValidation(body);
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == id) {
       User.findByPk(id)
         .then((user) => {
           if (!user) return res.status(404).json({ msg: "User not found !" });
-          if (error) return res.status(401).json(error.details[0].message);
+          if (error) return res.status(401).json({ msg: error.details[0].message });
           user.nom = body.nom;
           user.prenom = body.prenom;
           user.email = body.email;
@@ -91,8 +91,20 @@ class UserController {
               .json({
                 msg: "Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 numéro et 1 caractère spécial",
               });
+          } else {
+            if (error.details[0].message.includes('"nom" with value')) {
+              return res.status(500).json({
+                msg: "Veuillez sasir un nom valide",
+              });
+            } else {
+              if (error.details[0].message.includes('"prenom" with value')) {
+                return res.status(500).json({
+                  msg: "Veuillez sasir un prenom valide",
+                });
+              }
+            }
           }
-          return res.status(500).json(error.details[0].message);
+          return res.status(500).json({msg: error.details[0].message});
         }
         bcrypt.hash(req.body.password, 10).then((hash) => {
           User.create({
@@ -112,7 +124,7 @@ class UserController {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == id) {
       User.destroy({ where: { id: id } })
@@ -137,10 +149,10 @@ class UserController {
           .compare(password, user.password)
           .then((valid) => {
             if (!valid) {
-              return res.status(401).json({ message: "Mot de passe incorrect !" });
+              return res.status(401).json({ msg: "Mot de passe incorrect !" });
             }
           
-            return res.status(200).json({ message: "Loggued",
+            return res.status(200).json({ msg: "Loggued",
               userId: user.id,
               role: user.role,
               nom: user.nom,

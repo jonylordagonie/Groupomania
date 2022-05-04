@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { UsersService } from 'src/app/core/services/users.service';
 import { tap } from 'rxjs';
 
 
@@ -18,21 +17,15 @@ export class RegisterComponent implements OnInit {
   emailRegex!: RegExp;
   nameRegex!: RegExp;
   passwordRegex!: RegExp;
-  errormsg: any;
-  erroremail: any;
-  errorpassword: any;
+  error!: string;
+  errormsg!: string;
 
-  constructor(private auth: AuthService,
-              private router: Router,
+  constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private userService: UsersService,
               private authService: AuthService) { }
 
   ngOnInit(): void {
-    // this.emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    // this.passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_.])[A-Za-z\d$@$!%*?&_.]{8,40}$/;
-    // this.nameRegex = /^[a-zA-ZÀ-ÿ -]{2,40}$/;
-
+    this.errormsg = ''
     this.registerForm = this.formBuilder.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -52,18 +45,25 @@ export class RegisterComponent implements OnInit {
       })
     ).subscribe(
       (res) => { console.log(res) },
-      (error) => {
-        this.errormsg = error.error
-        if (this.errormsg.lenght = 0){
-          
-        } else {
-          if (this.errormsg.msg.toString().includes('Email')) {
-            this.erroremail = this.errormsg.msg.toString().includes('Email')
+      error => {
+        console.log(error.error)
+        this.error = error.error.msg
+        if (this.error.length > 0) {
+          if (this.error.toLocaleLowerCase().includes('email')) {
+            this.errormsg = 'email'
+          } else {
+            if (this.error.toLocaleLowerCase().includes('passe')) {
+              this.errormsg = 'password'
+            } else {
+              if (this.error.toLocaleLowerCase().includes('un nom')) {
+                this.errormsg = 'nom'
+              } else {
+                if (this.error.toLocaleLowerCase().includes('un prenom')) {
+                  this.errormsg = 'prenom'
+                }
+              }
+            }
           }
-          if (this.errormsg.msg.toString().includes('passe')) {
-            this.errorpassword = this.errormsg.msg.toString().includes('passe')
-          }
-          console.log(this.errormsg)
         }
       }
     );

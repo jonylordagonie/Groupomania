@@ -36,16 +36,18 @@
         min-height: 30px;
         width: 70%;
       }
+      .fail {
+        border: 5px solid red;
+      }
     }
-
-    .error {
-      color: red;
-      width: 60%;
-      text-align: center;
-      margin: 0 auto;
-      margin-top: 1.5vh;
-      text-decoration: underline;
-    }
+  }
+  .error {
+    color: red;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 1.5vh;
+    text-decoration: underline;
   }
 }
 
@@ -53,7 +55,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  flex-direction: column;
+  gap: 20px;
   .btn {
     line-height: 50px;
     height: 50px;

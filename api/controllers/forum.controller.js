@@ -9,7 +9,7 @@ class ForumController {
   getAllTopics = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       Topic.findAll({
@@ -48,7 +48,7 @@ class ForumController {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       Topic.findByPk(id, {
@@ -80,7 +80,7 @@ class ForumController {
     const { body } = req;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.id
+    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
       const { error } = topicValidation(body);
