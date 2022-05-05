@@ -1,8 +1,8 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
-<img alt="HtML" src="https://img.shields.io/badge/Code-HTML5-E54C21?style=for-the-badge&logo=html5"/>
-<img alt="Css" src="https://img.shields.io/badge/Style-Css3-0070BB?style=for-the-badge&logo=css3"/>
-<img alt="Sass" src="https://img.shields.io/badge/Style-Sass-D68DB1?style=for-the-badge&logo=sass"/><br>
+<img alt="Mysql" src="https://img.shields.io/badge/Code-NodeJs-529e41?style=for-the-badge&logo=node.js"/>
+<img alt="Javascript" src="https://img.shields.io/badge/Code-JavaScript-F7DF1E?style=for-the-badge&logo=javascript"/>
+<img alt="Mysql" src="https://img.shields.io/badge/Code-Mysql-00758F?style=for-the-badge&logo=mysql"/><br>
 <img alt="Canva" src="https://img.shields.io/badge/Tools-Canva-0CBEC8?style=for-the-badge&logo=canva"/>
 <img alt="Npm" src="https://img.shields.io/badge/Tools-NPM-CC3534?style=for-the-badge&logo=npm"/>
 <img alt="Github" src="https://img.shields.io/badge/Tools-GitHub-1B1F23?style=for-the-badge&logo=github"/>
@@ -41,11 +41,12 @@
         <li>
           <a href="#installation">Installation</a>
           <ul>
-            <li><a href="#frontend">Frontend</a></li>
+             <li><a href="#database">Database</a></li>
+            <li><a href="#backend">Backend</a></li>
           </ul>
         </li>
       </ul>
-    </li>>
+    </li>
   </ol>
 </details>
 
@@ -64,9 +65,10 @@ It is this intermediate stage that I present to you here.
 
 ### Build With
 
-For this project I chose to carry it out using the Angular framework for the frontend part.
+For the backend side I used NodeJs and for the database, I used, as requested, Mysql.
 
-* [Angular](https://angular.io/)
+* [Mysql](https://www.mysql.com/fr/)
+* [NodeJs](https://nodejs.org/fr/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -78,9 +80,11 @@ I show you a way to install it locally but there is another way to do it. You ca
 
 ### Preresquisites
 
-To run the frontend part of the project you will need a code editor.<br>
+To run the project you will need the latest version of NodeJs, a mysql database manager, and a code editor.<br>
 I put you the links of what I would use for this installation:
 
+* [Mysql](https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7152681-installez-le-sgbd-mysql) : I let you read the course on the installation according to your version.
+* [NodeJs](https://nodejs.org/en/) : Required to run the backend.
 * [Visual Studio Code](https://code.visualstudio.com/) : I recommend this free editor which has an integrated terminal.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -89,29 +93,47 @@ I put you the links of what I would use for this installation:
 
 _Here are the instructions for installing the project and running it. Of course, you must have installed the various prerequisites(<a href="#preresquisites">available here</a>)_
 
-#### Frontend
+#### Database
 
-1. Select the "client" folder.
-2. Create a new file called ".env"
-3. In this file, write:
+1. Download the zip of the project available here: <a href="https://github.com/jonylordagonie/QuentinMoreau_7_01042022">Groupomania</a>
+2. Unzip the project on your computer.
+3. You can now open MySQL workbench and connect to your local instance.
+4. In the menu, "Server" you will click on "Data Import"
+6. Select "Import from Self-Contained File"
+7. At "Default Target Schema", press "New..." and write "groupomania".
+8. You can now press "Start Import".
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#### Backend
+
+1. Right click on the folder then "Open with Code" (Visual Studio Code logo)
+2. Select the "api" folder
+3. Create a new file called ".env"
+4. In this file write:
    ```.env
+   DB_HOST = localhost
+   DB_USER = YourUser
+   DB_PASSWORD = YourPasswword
+   DB_DATABASE = groupomania
    TOKEN = My_Secret_Token
    ```
-4. In the menu, select "Terminal", "New Terminal".
-5. In the terminal write:
+   _You will replace "YourUser" with your username to login to MySQL workbench by default "root". You will replace "YourPassword" with the password to connect to MySQL workbench_
+5. In the menu, select "Terminal", "New terminal".
+6. In this terminal write:
    ```npm
-   cd client
+   cd api
    ```
-6. Press enter.
-7. In the terminal write:
+7. Press enter
+8. In this terminal write:
    ```npm
    npm install
    ```
- 8. Press enter.
- 9.  In the terminal write:
-   ```npm
-   ng serve
-   ```
- 10. Wait for the server to start and let it run.
+ 9. Press enter and wait for the downloads to complete.
+10. In this terminal write:
+    ```npm
+    nodemon server
+    ```
+ 11. Wait for the server to start and let it run.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
