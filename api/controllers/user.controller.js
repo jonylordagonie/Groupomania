@@ -40,6 +40,7 @@ class UserController {
   }
 
   getUserById = (req, res, next) => {
+    console.log('ok')
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
@@ -73,7 +74,7 @@ class UserController {
       User.findByPk(id)
         .then((user) => {
           if (!user) return res.status(404).json({ msg: "User not found !" });
-          if (error) return res.status(401).json({ msg: error.details[0].message });
+          if (error) return res.status(500).json({ msg: error.details[0].message });
           user.nom = body.nom;
           user.prenom = body.prenom;
           user.email = body.email;
@@ -139,6 +140,7 @@ class UserController {
   };
 
   DeleteUser = (req, res, next) => {
+    console.log('test')
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
@@ -190,6 +192,7 @@ class UserController {
       })
       .catch((error) => res.status(500).json({ error }));
   };
+
 }
 
 module.exports = new UserController();

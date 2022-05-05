@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       error => {
         this.error = error.error.msg
         if (this.error.length > 0) {
-          if (this.error.includes('Email')) {
+          if (this.error.toLocaleLowerCase().includes('email')) {
             this.errormsg = 'email'
           } else {
             this.errormsg = 'password'

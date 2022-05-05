@@ -64,13 +64,27 @@ export class ModifyProfilComponent implements OnInit {
     if (values.email == null || values.email == '') {
       values.email = userinfo.email
     }
+    console.log('nom :', values.nom)
+    console.log('prenom :', values.prenom)
+    console.log('email :', values.email)
+    console.log(values)
     const userId = +this.route.snapshot.params['id']
-    this.userService.updateUser(values, userId)
+    this.userService.modifyUser(values, userId).subscribe(
+      () => this.router.navigateByUrl(`/profil/${userId}`)
+              .then(
+                () => location.reload()
+              )
+    )
   }
 
   onDelete(): void{
     const userId = +this.route.snapshot.params['id']
-    this.userService.deleteUser(userId)
+    this.userService.deleteUser(userId).subscribe(
+      () => this.router.navigateByUrl('/auth/logout')
+              .then(
+                () => location.reload()
+              )
+    )
   }
 
 }

@@ -10,9 +10,9 @@ import { ProfilComponent } from "./components/profil/profil/profil.component";
 
 
 const routes: Routes = [
+  { path: 'profil/:id/modify', component: ModifyProfilComponent, canActivate: [AuthGuard]},
   { path: 'profil/:id', component: ProfilComponent, canActivate: [AuthGuard] },
   { path: 'instamania', component: InstamaniaComponent, canActivate: [AuthGuard]},
-  { path: 'profil/:id/modify', component: ModifyProfilComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
