@@ -41,7 +41,7 @@ export class NewTopicComponent implements OnInit {
   onsubmit(): void{
     const title = this.newTopicForm.value.title
     const content = this.newTopicForm.value.content
-    const author = `${this.authService.getUser().nom} ${this.authService.getUser().prenom}`
+    const author = `${this.authService.getUser().prenom} ${this.authService.getUser().nom}`
     const value = {title, content, author}
     this.forumService.addTopic(value).subscribe(
       () => this.router.navigateByUrl('/forum')

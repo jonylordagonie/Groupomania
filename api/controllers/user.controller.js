@@ -10,7 +10,6 @@ class UserController {
   getAllUsers = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin") {
       User.findAll({
@@ -107,13 +106,19 @@ class UserController {
           } else {
             if (error.details[0].message.includes('"nom" with value')) {
               return res.status(500).json({
-                msg: "Veuillez sasir un nom valide",
+                msg: "Veuillez saisir un nom valide",
               });
             } else {
-              if (error.details[0].message.includes('"prenom" with value')) {
+              if (error.details[0].message.includes('"email" must be a valid email')) {
                 return res.status(500).json({
-                  msg: "Veuillez sasir un prenom valide",
+                  msg: "Veuillez saisir un email valide",
                 });
+              } else {
+                if (error.details[0].message.includes('"prenom" with value')) {
+                  return res.status(500).json({
+                    msg: "Veuillez saisir un prénom valide",
+                  });
+                }
               }
             }
           }
@@ -157,7 +162,7 @@ class UserController {
     const password = req.body.password;
     User.findOne({ where: { email: email } })
       .then((user) => {
-        if (!user) return res.status(404).json({ msg: "Email not found !" });
+        if (!user) return res.status(404).json({ msg: "L'email que vous utilisez correspond à aucun utilisateur !" });
         bcrypt
           .compare(password, user.password)
           .then((valid) => {

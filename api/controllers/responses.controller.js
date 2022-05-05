@@ -16,6 +16,7 @@ class ResponsesController {
     const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin" || userId == userId) {
+      console.log(id)
       if (error) return res.status(401).json(error.details[0].message);
       Response.create({
         ...body,
@@ -102,7 +103,6 @@ class ResponsesController {
     const { id } = req.params;
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, tokenkey);
-    const userId = decodedToken.userId
     const role = decodedToken.role;
     if (role === "admin") {
       Response.findAll({
@@ -134,20 +134,35 @@ class ResponsesController {
 
   deleteResponse = (req, res, next) => {
     const { id } = req.params;
-      const token = req.headers.authorization.split(" ")[1];
-      const decodedToken = jwt.verify(token, tokenkey);
-      const role = decodedToken.role;
-    if (role === "admin") {
-      Response.destroy({ where: { id: id } })
-        .then((ressource) => {
-          if (ressource === 0)
-            return res.status(404).json({ msg: "Not found !" });
-          res.status(200).json({ msg: "Message delted !" });
-        })
-        .catch((error) => res.status(500).json(error));
-    } else {
-      res.status(401).json({ msg: "Unauthorized request" });
-    }
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, tokenkey);
+    const role = decodedToken.role;
+    let test = 0
+    Response.findAll({
+      where: {
+        id: id,
+      }
+    })
+      .then((responses) => {
+        test = responses[0].dataValues.topicId
+        if (role === "admin") {
+          console.log(test);
+          Response.destroy({ where: { id: id } });
+          Topic.findByPk(test)
+            .then((topic) => {
+              if (!topic)
+                return res.status(404).json({ msg: "Topic not found !" });
+              topic.responses -= 1;
+              topic.save();
+            })
+            .catch((error) => res.status(500).json(error))
+          .then(() => res.status(201).json({ msg: "Response deleted !" }))
+          .catch((error) => res.status(500).json(error));
+        } else {
+          res.status(401).json({ msg: "Unauthorized request" });
+        }
+      })
+      .catch((error) => res.status(500).json(error));
   };
 }
 

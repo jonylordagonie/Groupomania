@@ -49,7 +49,7 @@ export class SingleTopicComponent implements OnInit {
   onResponse(): void {
     const topicId = +this.route.snapshot.params['id']
     const content = this.responseForm.value.content
-    const author = `${this.authService.getUser().nom} ${this.authService.getUser().prenom}`
+    const author = `${this.authService.getUser().prenom} ${this.authService.getUser().nom}`
     const value = { content, topicId, author }
     this.responseService.addResponse(value).subscribe(
       () => location.reload()

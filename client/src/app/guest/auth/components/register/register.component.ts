@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
         if (this.error.length > 0) {
           if (this.error.toLocaleLowerCase().includes('email')) {
             this.errormsg = 'email'
+            console.log(this.error)
           } else {
             if (this.error.toLocaleLowerCase().includes('passe')) {
               this.errormsg = 'password'

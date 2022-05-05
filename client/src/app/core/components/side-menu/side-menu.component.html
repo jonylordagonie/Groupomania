@@ -1,8 +1,8 @@
 <nav id="side-menu" role="navigation">
   <ul *ngIf="userId$">
-    <li *ngIf="!isLog"><a routerLink="/auth/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a></li>
-    <li *ngIf="!isLog"><a  routerLink="/auth/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a></li>
-    <li *ngIf="isLog"><a routerLink="/auth/logout" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Logout</a></li>
+    <li *ngIf="!isLog"><a routerLink="/auth/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">S'enregistrer</a></li>
+    <li *ngIf="!isLog"><a  routerLink="/auth/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Connexion</a></li>
+    <li *ngIf="isLog"><a routerLink="/auth/logout" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Déconnexion</a></li>
     <li *ngIf="isLog"><a routerLink="/profil/{{userId$}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Profil</a></li>
     <li *ngIf="isLog"><a routerLink="/index" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
     <li *ngIf="isLog"><a routerLink="/forum" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Forum</a></li>

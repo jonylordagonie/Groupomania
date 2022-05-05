@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
             this.errormsg = 'password'
           }
         }
-        console.log(this.error.length)
       }
     )
   }

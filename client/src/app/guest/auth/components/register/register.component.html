@@ -1,5 +1,5 @@
 <div class="login-form-card">
-  <h2>register</h2>
+  <h2>Créer un compte</h2>
   <form [formGroup]="registerForm" (ngSubmit)="onregister()">
     <div class="form-container">
       <div class="form-group">
@@ -14,7 +14,7 @@
           <label for="firstname">Prénom:</label>
           <input type="text" id="firstname" formControlName="prenom" placeholder="Entrez votre prénom ici..." style="color: #000" [ngClass]="{'fail': errormsg == 'prenom'}">
         </div>
-        <span class="error" *ngIf="f['prenom'].errors">Saisissez un prenom !</span>
+        <span class="error" *ngIf="f['prenom'].errors">Saisissez un prénom !</span>
       </div>
       <div class="form-group">
         <div class="form-saisie">
@@ -28,7 +28,7 @@
           <label for="password">Mot de passe:</label>
           <input type="password" id="password" formControlName="password" placeholder="Entrez votre mot de passe ici..." style="color: #000" [ngClass]="{'fail': errormsg == 'password'}">
         </div>
-        <span class="error" *ngIf="f['password'].errors">Saisissez un Mot de passe</span>
+        <span class="error" *ngIf="f['password'].errors">Saisissez un mot de passe</span>
       </div>
     </div>
     <div class="action-buttons">

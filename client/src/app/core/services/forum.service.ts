@@ -34,7 +34,7 @@ export class ForumService {
         if (results.length > 5) {
           i = results.length - 5
         } else {
-          i = results.length
+          i = 0
         }
         const lastTopics = []
         for (let r = i;  r < results.length; r++){
