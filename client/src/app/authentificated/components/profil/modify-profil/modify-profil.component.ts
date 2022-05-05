@@ -17,6 +17,7 @@ export class ModifyProfilComponent implements OnInit {
   emailRegex!: RegExp;
   user$!: Observable<User>;
   error!: string;
+  maintenance!: boolean;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -25,6 +26,7 @@ export class ModifyProfilComponent implements OnInit {
               private userService: UsersService,) { }
 
   ngOnInit(): void {
+    this.maintenance = true
     this.authService.isUser().subscribe(
       ok => console.log(ok),
       () => {

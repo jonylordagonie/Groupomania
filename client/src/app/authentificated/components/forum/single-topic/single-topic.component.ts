@@ -59,13 +59,23 @@ export class SingleTopicComponent implements OnInit {
   onDeleteTopic() {
     const topicId = +this.route.snapshot.params['id']
     this.forumService.deleteTopic(topicId).subscribe(
-      () => this.router.navigateByUrl('forum')
+      () => this.router.navigateByUrl('forum'),
+      error => {
+        if (error.status == 401) {
+          alert('Pour supprimer un sujet veuillez contacté un administrateur !')
+        }
+      }
     )
   }
 
   onDeleteResponse(id: number) {
     this.responseService.deleteResponce(id).subscribe(
-      () => location.reload()
+      () => location.reload(),
+      error => {
+        if (error.status == 401) {
+          alert('Pour supprimer un commentaire veuillez contacté un administrateur !')
+        }
+      }
     )
   }
 }

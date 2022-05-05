@@ -1,3 +1,29 @@
+.maintenance{
+    background: repeating-linear-gradient(45deg,
+      rgba(yellow, .7),
+      rgba(yellow, .7) 10px,
+      rgba(black, .7) 10px,
+      rgba(black, .7) 20px);
+    border-radius: 2%;
+    width: 40%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5%;
+    margin: 50px auto;
+    span {
+      text-decoration: underline;
+      line-height: 20px;
+      color: black;
+      background: yellow;
+      box-shadow: 5px 5px 15px 5px #000000;
+      font-weight: bold;
+      padding: 2%;
+      border-radius: 10px;
+    }
+}
 .unauthorized {
   display: flex;
   flex-direction: column;
