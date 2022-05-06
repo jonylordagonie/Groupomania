@@ -219,11 +219,12 @@ mot de passe: Admin123.<br>
     - [x] Ability to delete an answer (only for administrators)
 - [x] Profil
     - [x] Ability to view their profile
-    - [ ] Ability to edit your profile
-    - [ ] Ability to delete your profile
+    - [x] Ability to edit your profile
+    - [ ] Ability to change your profil image
+    - [x] Ability to delete your profile
     - [x] Ability to view another user's profile (only for admins)
-    - [ ] Ability to edit another user's profile (only for admins)
-    - [ ] Ability to delete another user's profile (only for administrators)
+    - [x] Ability to edit another user's profile (only for admins)
+    - [x] Ability to delete another user's profile (only for administrators)
 - [ ] Instamania
     - [ ] Display of Mania's in order of last modification
     - [ ] Ability to create a new Mania
