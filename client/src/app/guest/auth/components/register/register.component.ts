@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
     ).subscribe(
       (res) => { console.log(res) },
       error => {
-        console.log(error.error)
         this.error = error.error.msg
         if (this.error.length > 0) {
           if (this.error.toLocaleLowerCase().includes('email')) {

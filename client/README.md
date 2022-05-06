@@ -15,7 +15,7 @@
     <img src="https://user.oc-static.com/upload/2019/09/04/15676009353158_image2.png" alt="Logo">
   </a>
 
-  <h3 align="center"Create a corporate social network</h3>
+  <h3 align="center">Create a corporate social network</h3>
 
   <p align="center">
     Read this README in order to properly use and install the project!

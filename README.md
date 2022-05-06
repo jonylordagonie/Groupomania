@@ -19,7 +19,7 @@
     <img src="https://user.oc-static.com/upload/2019/09/04/15676009353158_image2.png" alt="Logo">
   </a>
 
-  <h3 align="center"Create a corporate social network</h3>
+  <h3 align="center">Create a corporate social network</h3>
 
   <p align="center">
     Read this README in order to properly use and install the project!
@@ -108,8 +108,9 @@ _Here are the instructions for installing the project and running it. Of course,
 3. You can now open MySQL workbench and connect to your local instance.
 4. In the menu, "Server" you will click on "Data Import"
 6. Select "Import from Self-Contained File"
-7. At "Default Target Schema", press "New..." and write "groupomania".
-8. You can now press "Start Import".
+7. Click on the "..." button and select "groupomania.sql" on your computer.
+8. At "Default Target Schema", press "New..." and write "groupomania".
+9. You can now press "Start Import".
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
