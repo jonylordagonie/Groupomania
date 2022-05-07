@@ -149,24 +149,25 @@ _Here are the instructions for installing the project and running it. Of course,
 
 #### Frontend
 
-1. Select the "client" folder.
-2. Create a new file called ".env"
-3. In this file, write:
+1. NodeJs vminimal version (12.0.20)
+2. Select the "client" folder.
+3. Create a new file called ".env"
+4. In this file, write:
    ```.env
    TOKEN = My_Secret_Token
    ```
-4. In the menu, select "Terminal", "New Terminal".
-5. In the terminal write:
+5. In the menu, select "Terminal", "New Terminal".
+6. In the terminal write:
    ```npm
    cd client
    ```
-6. Press enter.
-7. In the terminal write:
+7. Press enter.
+8. In the terminal write:
    ```npm
    npm install
    ```
- 8. Press enter.
- 9.  In the terminal write:
+ 1. Press enter.
+ 2.  In the terminal write:
    ```npm
    ng serve
    ```
